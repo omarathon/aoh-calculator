@@ -12,6 +12,8 @@ from alive_progress import alive_bar
 
 import time
 
+from osgeo import gdal
+
 def check_for_mantissas(layer, layer_name):
     array = layer.read_array(0, 0, layer._raster_xsize, layer._raster_ysize)
     if np.any(array % 1 != 0):
@@ -102,6 +104,11 @@ def aohcalc(
     for layer in layers:
         layer.set_window_for_intersection(intersection)
 
+    print(f"Habitat map datatype: {gdal.GetDataTypeName(habitat_map.datatype)}")
+    print(f"Elevation map datatype: {gdal.GetDataTypeName(elevation_map.datatype)}")
+    print(f"Range map datatype: {gdal.GetDataTypeName(range_map.datatype)}")
+
+
     result_filename = os.path.join(output_directory_path, f"{species_id}_{seasonality}.tif")
     result = RasterLayer.empty_raster_layer_like(
         habitat_map,
@@ -110,6 +117,8 @@ def aohcalc(
         nodata=2,
         nbits=2
     )
+
+    print(f"Result raster layer datatype: {gdal.GetDataTypeName(result.datatype)}")
 
     try:
         start_time = time.perf_counter_ns()
