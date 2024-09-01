@@ -10,6 +10,8 @@ from geopandas import gpd
 from yirgacheffe.layers import RasterLayer, VectorLayer
 from alive_progress import alive_bar
 
+import time
+
 def load_crosswalk_table(table_file_name: str) -> Dict[str,int]:
     rawdata = pd.read_csv(table_file_name)
     result = {}
@@ -43,9 +45,13 @@ def aohcalc(
 ) -> None:
     os.makedirs(output_directory_path, exist_ok=True)
 
+    start_time = time.perf_counter_ns()
     crosswalk_table = load_crosswalk_table(crosswalk_path)
+    print(f"Crosswalk table loaded in {time.perf_counter_ns() - start_time} ns")
 
+    start_time = time.perf_counter_ns()
     filtered_species_info = gpd.read_file(species_data_path)
+    print(f"Species data loaded in {time.perf_counter_ns() - start_time} ns")
     assert filtered_species_info.shape[0] == 1
 
     try:
@@ -56,7 +62,9 @@ def aohcalc(
         print(f"Species data missing one or more needed attributes: {filtered_species_info}", file=sys.stderr)
         sys.exit()
 
+    start_time = time.perf_counter_ns()
     habitat_list = crosswalk_habitats(crosswalk_table, raw_habitats)
+    print(f"Habitat list crosswalked in {time.perf_counter_ns() - start_time} ns")
 
     species_id = filtered_species_info.id_no.values[0]
     seasonality = filtered_species_info.seasonal.values[0]
@@ -64,6 +72,7 @@ def aohcalc(
         print(f"No habitat for {species_id} {seasonality}")
         return
 
+    start_time = time.perf_counter_ns()
     habitat_map = RasterLayer.layer_from_file(habitat_path)
     elevation_map = RasterLayer.layer_from_file(elevation_path)
     range_map = VectorLayer.layer_from_file_like(
@@ -71,9 +80,14 @@ def aohcalc(
         f'id_no = {species_id} AND seasonal = {seasonality}',
         habitat_map
     )
+    print(f"Maps loaded in {time.perf_counter_ns() - start_time} ns")
 
     layers = [habitat_map, elevation_map, range_map]
+
+    start_time = time.perf_counter_ns()
     intersection = RasterLayer.find_intersection(layers)
+    print(f"Intersection found in {time.perf_counter_ns() - start_time} ns")
+
     for layer in layers:
         layer.set_window_for_intersection(intersection)
 
@@ -85,20 +99,26 @@ def aohcalc(
         nodata=2,
         nbits=2
     )
-    # b = result._dataset.GetRasterBand(1)
-    # b.SetMetadataItem('NBITS', '2', 'IMAGE_STRUCTURE')
 
     try:
+        start_time = time.perf_counter_ns()
         filtered_habtitat = habitat_map.numpy_apply(lambda chunk: np.isin(chunk, habitat_list))
+        print(f"Filtered habitat map in {time.perf_counter_ns() - start_time} ns")
     except ValueError:
         print(habitat_list)
         assert False
+
+    start_time = time.perf_counter_ns()
     filtered_elevation = elevation_map.numpy_apply(
         lambda chunk: np.logical_and(chunk >= elevation_lower, chunk <= elevation_upper)
     )
+    print(f"Filtered elevation map in {time.perf_counter_ns() - start_time} ns")
 
+    start_time = time.perf_counter_ns()
     calc = filtered_habtitat * filtered_elevation * range_map
     calc = calc + (range_map.numpy_apply(lambda chunk: (1 - chunk)) * 2)
+    print(f"Calculation completed in {time.perf_counter_ns() - start_time} ns")
+
     with alive_bar(manual=True) as bar:
         calc.save(result, callback=bar)
 
