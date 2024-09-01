@@ -117,10 +117,11 @@ def aohcalc(
     start_time = time.perf_counter_ns()
     calc = filtered_habtitat * filtered_elevation * range_map
     calc = calc + (range_map.numpy_apply(lambda chunk: (1 - chunk)) * 2)
-    print(f"Calculation completed in {time.perf_counter_ns() - start_time} ns")
 
     with alive_bar(manual=True) as bar:
         calc.save(result, callback=bar)
+
+    print(f"Calculation completed in {time.perf_counter_ns() - start_time} ns")
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Area of habitat calculator.")
