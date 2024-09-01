@@ -55,8 +55,8 @@ def aohcalc(
     assert filtered_species_info.shape[0] == 1
 
     try:
-        elevation_lower = int(filtered_species_info.elevation_lower.values[0])
-        elevation_upper = int(filtered_species_info.elevation_upper.values[0])
+        elevation_lower = int(float(filtered_species_info.elevation_lower.values[0]))
+        elevation_upper = int(float(filtered_species_info.elevation_upper.values[0]))
         raw_habitats = filtered_species_info.full_habitat_code.values[0].split('|')
     except (AttributeError, TypeError):
         print(f"Species data missing one or more needed attributes: {filtered_species_info}", file=sys.stderr)
