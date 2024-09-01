@@ -12,6 +12,13 @@ from alive_progress import alive_bar
 
 import time
 
+def check_for_mantissas(layer, layer_name):
+    array = layer.read_array(0, 0, layer._raster_xsize, layer._raster_ysize)
+    if np.any(array % 1 != 0):
+        print(f"Warning: {layer_name} contains values with mantissas.")
+    else:
+        print(f"{layer_name} does not contain any values with mantissas.")
+
 def load_crosswalk_table(table_file_name: str) -> Dict[str,int]:
     rawdata = pd.read_csv(table_file_name)
     result = {}
@@ -81,6 +88,10 @@ def aohcalc(
         habitat_map
     )
     print(f"Maps loaded in {time.perf_counter_ns() - start_time} ns")
+
+    check_for_mantissas(habitat_map, "habitat_map")
+    check_for_mantissas(elevation_map, "elevation_map")
+    check_for_mantissas(range_map, "range_map")
 
     layers = [habitat_map, elevation_map, range_map]
 
