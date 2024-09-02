@@ -112,7 +112,8 @@ def aohcalc(
     print(f"Elevation map window={elevation_map._window} active_area={elevation_map._active_area}")
     print(f"Range map window={range_map._window} active_area={range_map._active_area}")
 
-
+    print("Completed assessment.")
+    return
 
 
     result_filename = os.path.join(output_directory_path, f"{species_id}_{seasonality}.tif")
