@@ -91,9 +91,9 @@ def aohcalc(
     )
     print(f"Maps loaded in {time.perf_counter_ns() - start_time} ns")
 
-    check_for_mantissas(habitat_map, "habitat_map")
-    check_for_mantissas(elevation_map, "elevation_map")
-    check_for_mantissas(range_map, "range_map")
+    #check_for_mantissas(habitat_map, "habitat_map")
+    #check_for_mantissas(elevation_map, "elevation_map")
+    #check_for_mantissas(range_map, "range_map")
 
     layers = [habitat_map, elevation_map, range_map]
 
@@ -107,6 +107,12 @@ def aohcalc(
     print(f"Habitat map datatype: {gdal.GetDataTypeName(habitat_map.datatype)}")
     print(f"Elevation map datatype: {gdal.GetDataTypeName(elevation_map.datatype)}")
     print(f"Range map datatype: {gdal.GetDataTypeName(range_map.datatype)}")
+
+    print(f"Habitat map window={habitat_map._window} active_area={habitat_map._active_area}")
+    print(f"Elevation map window={elevation_map._window} active_area={elevation_map._active_area}")
+    print(f"Range map window={range_map._window} active_area={range_map._active_area}")
+
+
 
 
     result_filename = os.path.join(output_directory_path, f"{species_id}_{seasonality}.tif")
