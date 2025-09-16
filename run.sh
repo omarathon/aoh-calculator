@@ -3,66 +3,100 @@ set -euo pipefail
 
 N="${1:-}"
 
+area_path="/maps/omsst2/life-v1/area-per-pixel.tif"
+elevation_min_path="/maps/omsst2/life-v1/elevation-min-1k.tif"
+elevation_max_path="/maps/omsst2/life-v1/elevation-max-1k.tif"
+crosswalk_path="/maps/omsst2/life-v1/crosswalk.csv"
+
+taxas=("AMPHIBIA" "AVES")
 
 species_data_dir="/maps/omsst2/life-v1/species-info"
-area_path="/maps/omsst2/life-v1/area-per-pixel.tif"
 
 habitats_current_path="/maps/omsst2/life-v1/habitat_maps/current"
 habitats_restore_path="/maps/omsst2/life-v1/habitat_maps/restore"
 habitats_arable_path="/maps/omsst2/life-v1/habitat_maps/arable"
 habitats_pnv_path="/maps/omsst2/life-v1/habitat_maps/pnv"
 
-elevation_min_path="/maps/omsst2/life-v1/elevation-min-1k.tif"
-elevation_max_path="/maps/omsst2/life-v1/elevation-max-1k.tif"
-crosswalk_path="/maps/omsst2/life-v1/crosswalk.csv"
 output_directory="/maps/omsst2/life-v1/aohs"
 
-species_files=$(find "$species_data_dir" -name "*.geojson")
-total=$(echo "$species_files" | wc -l)
+echo "$taxas" | while read -r TAXA; do
 
-# evenly sample N if specified
-if [ -n "$N" ] && [ "$N" -lt "$total" ]; then
-    step=$(awk "BEGIN {print $total/$N}")
-    # select every 'step'-th line and print its index
-    sampled=$(echo "$species_files" | awk -v step="$step" '
-        NR==1 || int((NR-1) % step) == 0 {
-            print NR ":" $0
-        }')
-    # split into species_files without index for further processing
-    species_files=$(echo "$sampled" | cut -d: -f2-)
-    echo "Sampled species indexes:"
-    echo "$sampled" | cut -d: -f1
-    echo "(total: ${total})"
-fi
+    species_data_path_current = "${species_data_dir}/${TAXA}/current"
+    species_data_path_historic = ${species_data_dir}/${TAXA}/historic"
 
-total=$(echo "$species_files" | wc -l)
+    species_files_current=$(find "$species_data_path_current" -name "*.geojson")
+    species_files_historic=$(find "$species_data_path_historic" -name "*.geojson")
 
-i=0
-start_time=$(date +%s)
+    total_current=$(echo "$species_files_current" | wc -l)
+    total_historic=$(echo "$species_files_historic" | wc -l)
 
-echo "Processing $total species files..."
+    if [ -n "$N" ] && [ "$N" -lt "$total_current" ]; then
+        step=$(awk "BEGIN {print $total_current/$N}")
+        sampled=$(echo "$species_files_current" | awk -v step="$step" '
+            NR==1 || int((NR-1) % step) == 0 {
+                print NR ":" $0
+            }')
+        species_files_current=$(echo "$sampled" | cut -d: -f2-)
+    fi
 
-echo "$species_files" | while read -r species_file; do
-    i=$((i+1))
-    species_name=$(basename "$species_file" .geojson)
+    if [ -n "$N" ] && [ "$N" -lt "$total_historic" ]; then
+        step=$(awk "BEGIN {print $total_historic/$N}")
+        sampled=$(echo "$species_files_historic" | awk -v step="$step" '
+            NR==1 || int((NR-1) % step) == 0 {
+                print NR ":" $0
+            }')
+        species_files_historic=$(echo "$sampled" | cut -d: -f2-)
+    fi
 
-    now=$(date +%s)
-    elapsed=$((now - start_time))
-    avg=$((elapsed / i))
-    remaining=$(((total - i) * avg))
+    total_current=$(echo "$species_files_current" | wc -l)
+    total_historic=$(echo "$species_files_historic" | wc -l)
 
-    echo "[$i/$total] species=${species_name}, elapsed=${elapsed}s, est_remaining=${remaining}s"
+    echo "species files current:\n${species_files_current}\n"
+    echo "species files historic:\n${species_files_historic}\n"
 
-    echo "habitat=current, species=${species_name}..."
-    python3 ./aohcalc.py --habitats "$habitats_current_path" --elevation-min "${elevation_min_path}" --elevation-max "${elevation_max_path}" --area "${area_path}" --crosswalk "$crosswalk_path" --speciesdata "$species_file" --output "${output_directory}/current"
+    i=0
+    start_time=$(date +%s)
 
-    echo "habitat=restore, species=${species_name}..."
-    python3 ./aohcalc.py --habitats "$habitats_restore_path" --elevation-min "${elevation_min_path}" --elevation-max "${elevation_max_path}" --area "${area_path}" --crosswalk "$crosswalk_path" --speciesdata "$species_file" --output "${output_directory}/restore"
+    echo "$species_files_current" | while read -r species_file; do
+        i=$((i+1))
+        species_name=$(basename "$species_file" .geojson)
 
-    echo "habitat=arable, species=${species_name}..."
-    python3 ./aohcalc.py --habitats "$habitats_arable_path" --elevation-min "${elevation_min_path}" --elevation-max "${elevation_max_path}" --area "${area_path}" --crosswalk "$crosswalk_path" --speciesdata "$species_file" --output "${output_directory}/arable"
+        now=$(date +%s)
+        elapsed=$((now - start_time))
+        avg=$((elapsed / i))
+        remaining=$(((total_current - i) * avg))
 
-    echo "habitat=pnv, species=${species_name}..."
-    python3 ./aohcalc.py --habitats "$habitats_pnv_path" --elevation-min "${elevation_min_path}" --elevation-max "${elevation_max_path}" --area "${area_path}" --crosswalk "$crosswalk_path" --speciesdata "$species_file" --output "${output_directory}/pnv"
+        echo "[$i/$total_current] species=${species_name}, elapsed=${elapsed}s, est_remaining=${remaining}s"
+
+        echo "TAXA=${TAXA}, habitat=current, species=${species_name}..."
+        python3 ./aohcalc.py --habitats "$habitats_current_path" --elevation-min "${elevation_min_path}" --elevation-max "${elevation_max_path}" --area "${area_path}" --crosswalk "$crosswalk_path" --speciesdata "$species_file" --output "${output_directory}/current/${TAXA}"
+
+        echo "TAXA=${TAXA}, habitat=restore, species=${species_name}..."
+        python3 ./aohcalc.py --habitats "$habitats_restore_path" --elevation-min "${elevation_min_path}" --elevation-max "${elevation_max_path}" --area "${area_path}" --crosswalk "$crosswalk_path" --speciesdata "$species_file" --output "${output_directory}/restore/${TAXA}"
+
+        echo "TAXA=${TAXA}, habitat=arable, species=${species_name}..."
+        python3 ./aohcalc.py --habitats "$habitats_arable_path" --elevation-min "${elevation_min_path}" --elevation-max "${elevation_max_path}" --area "${area_path}" --crosswalk "$crosswalk_path" --speciesdata "$species_file" --output "${output_directory}/arable/${TAXA}"
+
+    done
+
+    echo "$species_files_historic" | while read -r species_file; do
+        i=$((i+1))
+        species_name=$(basename "$species_file" .geojson)
+
+        now=$(date +%s)
+        elapsed=$((now - start_time))
+        avg=$((elapsed / i))
+        remaining=$(((total_historic - i) * avg))
+
+        echo "[$i/$total_historic] species=${species_name}, elapsed=${elapsed}s, est_remaining=${remaining}s"
+
+        echo "TAXA=${TAXA} habitat=pnv, species=${species_name}..."
+        python3 ./aohcalc.py --habitats "$habitats_pnv_path" --elevation-min "${elevation_min_path}" --elevation-max "${elevation_max_path}" --area "${area_path}" --crosswalk "$crosswalk_path" --speciesdata "$species_file" --output "${output_directory}/pnv/${TAXA}"
+
+    done
 
 done
+
+
+
+
