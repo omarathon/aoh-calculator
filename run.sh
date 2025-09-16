@@ -51,8 +51,10 @@ echo "$taxas" | while read -r TAXA; do
     total_current=$(echo "$species_files_current" | wc -l)
     total_historic=$(echo "$species_files_historic" | wc -l)
 
-    echo "species files current:\n${species_files_current}\n"
-    echo "species files historic:\n${species_files_historic}\n"
+    echo "species files current:"
+    echo "${species_files_current}"
+    echo "species files historic:"
+    echo "${species_files_historic}"
 
     i=0
     start_time=$(date +%s)
