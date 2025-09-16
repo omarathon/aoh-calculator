@@ -21,8 +21,8 @@ output_directory="/maps/omsst2/life-v1/aohs"
 
 echo "$taxas" | while read -r TAXA; do
 
-    species_data_path_current = "${species_data_dir}/${TAXA}/current"
-    species_data_path_historic = ${species_data_dir}/${TAXA}/historic"
+    species_data_path_current="${species_data_dir}/${TAXA}/current"
+    species_data_path_historic="${species_data_dir}/${TAXA}/historic"
 
     species_files_current=$(find "$species_data_path_current" -name "*.geojson")
     species_files_historic=$(find "$species_data_path_historic" -name "*.geojson")
