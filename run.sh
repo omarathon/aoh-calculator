@@ -19,7 +19,7 @@ habitats_pnv_path="/maps/omsst2/life-v1/habitat_maps/pnv"
 
 output_directory="/maps/omsst2/life-v1/aohs"
 
-echo "$taxas" | while read -r TAXA; do
+for TAXA in "${taxas[@]}"; do
 
     species_data_path_current="${species_data_dir}/${TAXA}/current"
     species_data_path_historic="${species_data_dir}/${TAXA}/historic"
