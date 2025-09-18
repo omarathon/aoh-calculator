@@ -20,6 +20,8 @@ gdal.UseExceptions()
 import yirgacheffe # pylint: disable=C0412,C0413
 yirgacheffe.constants.YSTEP = 2048
 
+import time
+
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)-8s %(message)s')
 
@@ -54,6 +56,8 @@ def aohcalc(
     force_habitat: bool,
     output_directory_path: Path,
 ) -> None:
+    t0 = time.time()
+
     os.makedirs(output_directory_path, exist_ok=True)
 
     crosswalk_table = load_crosswalk_table(crosswalk_path)
@@ -204,6 +208,10 @@ def aohcalc(
 
     calc = filtered_by_both * area_map
 
+    t1 = time.time()
+
+    print("doing main calculation")
+
     with RasterLayer.empty_raster_layer_like(
         min_elevation_map,
         filename=result_filename,
@@ -212,6 +220,10 @@ def aohcalc(
     ) as aoh_raster:
         with alive_bar(manual=True) as bar:
             aoh_total = calc.save(aoh_raster, and_sum=True, callback=bar)
+
+    t2 = time.time()
+
+    print(f"total time {(t2 - t0) * 1000} main calculation {(t1 - t0) * 1000}")
 
     manifest.update({
         'range_total': range_total,

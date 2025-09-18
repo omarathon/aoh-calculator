@@ -3,7 +3,7 @@ set -euo pipefail
 
 N="${1:-}"
 
-data_base="/maps/omsst2/life-small"
+data_base="/home/omar/eeg/data/life-small"
 
 area_path="${data_base}/area-per-pixel.tif"
 elevation_min_path="${data_base}/elevation-min-1k.tif"
