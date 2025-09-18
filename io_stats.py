@@ -1,7 +1,7 @@
 import re
 import statistics
 
-log_file = "trace_io.txt"
+log_file = "trace_io_server.txt"
 
 run_pattern = re.compile(r"^TAXA=.*")
 total_pattern = re.compile(r"total time (\S+) main calculation (\S+)")

@@ -1,0 +1,2254 @@
+species files current:
+/home/omar/eeg/data/life-small/species-info/AMPHIBIA/current/197090_RESIDENT.geojson
+/home/omar/eeg/data/life-small/species-info/AMPHIBIA/current/56718_RESIDENT.geojson
+/home/omar/eeg/data/life-small/species-info/AMPHIBIA/current/46203865_RESIDENT.geojson
+species files historic:
+/home/omar/eeg/data/life-small/species-info/AMPHIBIA/historic/61884_RESIDENT.geojson
+/home/omar/eeg/data/life-small/species-info/AMPHIBIA/historic/59019_BREEDING.geojson
+/home/omar/eeg/data/life-small/species-info/AMPHIBIA/historic/56627_RESIDENT.geojson
+[1/3] species=197090_RESIDENT, elapsed=0s, est_remaining=0s
+TAXA=AMPHIBIA, habitat=current, species=197090_RESIDENT...
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.08130073547363281
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.13637542724609375
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.05555152893066406
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.041961669921875
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.03600120544433594
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: VectorLayer _read_array_for_area
+on 0.0%: VectorLayer::read 0.0476837158203125
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: UniformAreaLayer _read_array_with_window
+|████████████████████████████████████████| 100% in 0.0s (245.57%/s) 
+TAXA=AMPHIBIA, habitat=restore, species=197090_RESIDENT...
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.11730194091796875
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.1468658447265625
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.1304149627685547
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.08988380432128906
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.051975250244140625
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: VectorLayer _read_array_for_area
+on 0.0%: VectorLayer::read 0.15306472778320312
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: UniformAreaLayer _read_array_with_window
+|████████████████████████████████████████| 100% in 0.0s (144.13%/s) 
+TAXA=AMPHIBIA, habitat=arable, species=197090_RESIDENT...
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.20003318786621094
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.14495849609375
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.08225440979003906
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.04363059997558594
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: VectorLayer _read_array_for_area
+on 0.0%: VectorLayer::read 0.05602836608886719
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: UniformAreaLayer _read_array_with_window
+|████████████████████████████████████████| 100% in 0.0s (275.89%/s) 
+[2/3] species=56718_RESIDENT, elapsed=10s, est_remaining=5s
+TAXA=AMPHIBIA, habitat=current, species=56718_RESIDENT...
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.07534027099609375
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.06914138793945312
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.07677078247070312
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.05626678466796875
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.04315376281738281
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: VectorLayer _read_array_for_area
+on 0.0%: VectorLayer::read 0.1761913299560547
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: UniformAreaLayer _read_array_with_window
+|████████████████████████████████████████| 100% in 0.0s (138.50%/s) 
+TAXA=AMPHIBIA, habitat=restore, species=56718_RESIDENT...
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.16307830810546875
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.10633468627929688
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.06318092346191406
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.19502639770507812
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.10538101196289062
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: VectorLayer _read_array_for_area
+on 0.0%: VectorLayer::read 0.10538101196289062
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: UniformAreaLayer _read_array_with_window
+|████████████████████████████████████████| 100% in 0.0s (173.12%/s) 
+TAXA=AMPHIBIA, habitat=arable, species=56718_RESIDENT...
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.1506805419921875
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.10418891906738281
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.08177757263183594
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.04792213439941406
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: VectorLayer _read_array_for_area
+on 0.0%: VectorLayer::read 0.06794929504394531
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: UniformAreaLayer _read_array_with_window
+|████████████████████████████████████████| 100% in 0.0s (280.87%/s) 
+[3/3] species=46203865_RESIDENT, elapsed=20s, est_remaining=0s
+TAXA=AMPHIBIA, habitat=current, species=46203865_RESIDENT...
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.1437664031982422
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.12040138244628906
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.18835067749023438
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.16117095947265625
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.11372566223144531
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: VectorLayer _read_array_for_area
+on 0.0%: VectorLayer::read 0.16832351684570312
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: UniformAreaLayer _read_array_with_window
+|████████████████████████████████████████| 100% in 0.0s (62.63%/s) 
+TAXA=AMPHIBIA, habitat=restore, species=46203865_RESIDENT...
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.13828277587890625
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.11134147644042969
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.12063980102539062
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.1575946807861328
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.18262863159179688
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: VectorLayer _read_array_for_area
+on 0.0%: VectorLayer::read 0.11992454528808594
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: UniformAreaLayer _read_array_with_window
+|████████████████████████████████████████| 100% in 0.0s (74.77%/s) 
+TAXA=AMPHIBIA, habitat=arable, species=46203865_RESIDENT...
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.1423358917236328
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.11134147644042969
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.12421607971191406
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.10704994201660156
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: VectorLayer _read_array_for_area
+on 0.0%: VectorLayer::read 0.2257823944091797
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: UniformAreaLayer _read_array_with_window
+|████████████████████████████████████████| 100% in 0.0s (88.25%/s) 
+[1/3] species=61884_RESIDENT, elapsed=31s, est_remaining=62s
+TAXA=AMPHIBIA habitat=pnv, species=61884_RESIDENT...
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.24056434631347656
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.13828277587890625
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.0705718994140625
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.06127357482910156
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.045299530029296875
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: VectorLayer _read_array_for_area
+on 0.0%: VectorLayer::read 0.07963180541992188
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: UniformAreaLayer _read_array_with_window
+|████████████████████████████████████████| 100% in 0.0s (271.47%/s) 
+[2/3] species=59019_BREEDING, elapsed=34s, est_remaining=17s
+TAXA=AMPHIBIA habitat=pnv, species=59019_BREEDING...
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.25010108947753906
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.16164779663085938
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.1442432403564453
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.1628398895263672
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.14734268188476562
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: VectorLayer _read_array_for_area
+on 0.0%: VectorLayer::read 0.19931793212890625
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: UniformAreaLayer _read_array_with_window
+|████████████████████████████████████████| 100% in 0.1s (9.52%/s) 
+[3/3] species=56627_RESIDENT, elapsed=39s, est_remaining=0s
+TAXA=AMPHIBIA habitat=pnv, species=56627_RESIDENT...
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.12254714965820312
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.07486343383789062
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.11873245239257812
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.17881393432617188
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.11563301086425781
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: VectorLayer _read_array_for_area
+on 0.0%: VectorLayer::read 0.1544952392578125
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: UniformAreaLayer _read_array_with_window
+|████████████████████████████████████████| 100% in 0.0s (115.18%/s) 
+species files current:
+/home/omar/eeg/data/life-small/species-info/AVES/current/103867190_RESIDENT.geojson
+/home/omar/eeg/data/life-small/species-info/AVES/current/22706353_RESIDENT.geojson
+/home/omar/eeg/data/life-small/species-info/AVES/current/22716787_RESIDENT.geojson
+species files historic:
+/home/omar/eeg/data/life-small/species-info/AVES/historic/22724899_RESIDENT.geojson
+/home/omar/eeg/data/life-small/species-info/AVES/historic/22726913_RESIDENT.geojson
+/home/omar/eeg/data/life-small/species-info/AVES/historic/22689332_RESIDENT.geojson
+[1/3] species=103867190_RESIDENT, elapsed=0s, est_remaining=0s
+TAXA=AVES, habitat=current, species=103867190_RESIDENT...
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.2090930938720703
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.2391338348388672
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.21767616271972656
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.3204345703125
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.20003318786621094
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: VectorLayer _read_array_for_area
+on 0.0%: VectorLayer::read 0.22864341735839844
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: UniformAreaLayer _read_array_with_window
+|████████████████████████████████████████| 100% in 0.0s (63.99%/s) 
+TAXA=AVES, habitat=restore, species=103867190_RESIDENT...
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.10251998901367188
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.1506805419921875
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.21505355834960938
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.14495849609375
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.08058547973632812
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: VectorLayer _read_array_for_area
+on 0.0%: VectorLayer::read 0.07677078247070312
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: UniformAreaLayer _read_array_with_window
+|████████████████████████████████████████| 100% in 0.0s (113.04%/s) 
+TAXA=AVES, habitat=arable, species=103867190_RESIDENT...
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.27823448181152344
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.1952648162841797
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.209808349609375
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.21600723266601562
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: VectorLayer _read_array_for_area
+on 0.0%: VectorLayer::read 0.2269744873046875
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: UniformAreaLayer _read_array_with_window
+|████████████████████████████████████████| 100% in 0.0s (31.72%/s) 
+[2/3] species=22706353_RESIDENT, elapsed=15s, est_remaining=7s
+TAXA=AVES, habitat=current, species=22706353_RESIDENT...
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.13208389282226562
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.1392364501953125
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.12564659118652344
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.09751319885253906
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.10371208190917969
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: VectorLayer _read_array_for_area
+on 0.0%: VectorLayer::read 0.09679794311523438
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: UniformAreaLayer _read_array_with_window
+|████████████████████████████████████████| 100% in 0.0s (168.65%/s) 
+TAXA=AVES, habitat=restore, species=22706353_RESIDENT...
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.16927719116210938
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.10704994201660156
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.3349781036376953
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.17642974853515625
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.06937980651855469
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: VectorLayer _read_array_for_area
+on 0.0%: VectorLayer::read 0.16880035400390625
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: UniformAreaLayer _read_array_with_window
+|████████████████████████████████████████| 100% in 0.0s (87.27%/s) 
+TAXA=AVES, habitat=arable, species=22706353_RESIDENT...
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.6048679351806641
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.09775161743164062
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.19311904907226562
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.164031982421875
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: VectorLayer _read_array_for_area
+on 0.0%: VectorLayer::read 0.13637542724609375
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: UniformAreaLayer _read_array_with_window
+|████████████████████████████████████████| 100% in 0.0s (163.86%/s) 
+[3/3] species=22716787_RESIDENT, elapsed=32s, est_remaining=0s
+TAXA=AVES, habitat=current, species=22716787_RESIDENT...
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 1.249074935913086
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.2949237823486328
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.3178119659423828
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.324249267578125
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.19884109497070312
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: VectorLayer _read_array_for_area
+on 0.0%: VectorLayer::read 1.367807388305664
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: UniformAreaLayer _read_array_with_window
+|████████████████████████████████████████| 100% in 0.1s (17.88%/s) 
+TAXA=AVES, habitat=restore, species=22716787_RESIDENT...
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.9665489196777344
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.171661376953125
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.16188621520996094
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.22363662719726562
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.1888275146484375
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: VectorLayer _read_array_for_area
+on 0.0%: VectorLayer::read 0.1659393310546875
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: UniformAreaLayer _read_array_with_window
+|████████████████████████████████████████| 100% in 0.0s (27.82%/s) 
+TAXA=AVES, habitat=arable, species=22716787_RESIDENT...
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.6468296051025391
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.1552104949951172
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.1685619354248047
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.20384788513183594
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: VectorLayer _read_array_for_area
+on 0.0%: VectorLayer::read 0.21696090698242188
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: UniformAreaLayer _read_array_with_window
+|████████████████████████████████████████| 100% in 0.0s (51.49%/s) 
+[1/3] species=22724899_RESIDENT, elapsed=45s, est_remaining=90s
+TAXA=AVES habitat=pnv, species=22724899_RESIDENT...
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.15425682067871094
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.07486343383789062
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.1308917999267578
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 1.256704330444336
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.14781951904296875
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: VectorLayer _read_array_for_area
+on 0.0%: VectorLayer::read 0.13136863708496094
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: UniformAreaLayer _read_array_with_window
+|████████████████████████████████████████| 100% in 0.0s (139.77%/s) 
+[2/3] species=22726913_RESIDENT, elapsed=49s, est_remaining=24s
+TAXA=AVES habitat=pnv, species=22726913_RESIDENT...
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.7340908050537109
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.3437995910644531
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.26702880859375
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.41294097900390625
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 0.42700767517089844
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: VectorLayer _read_array_for_area
+on 0.0%: VectorLayer::read 0.29468536376953125
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: UniformAreaLayer _read_array_with_window
+|████████████████████████████████████████| 100% in 0.0s (20.13%/s) 
+[3/3] species=22689332_RESIDENT, elapsed=53s, est_remaining=0s
+TAXA=AVES habitat=pnv, species=22689332_RESIDENT...
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 12.203216552734375
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 1.7249584197998047
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 1.2943744659423828
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 1.5063285827636719
+OMAR: LayerMathMixin _eval
+OMAR: UniformAreaLayer _read_array_with_window
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+OMAR: LayerConstant _eval
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: VectorLayer _read_array_for_area
+VectorLayer::read 1.3918876647949219
+OMAR: LayerOperation _eval
+OMAR: LayerMathMixin _eval
+OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerConstant _eval
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: VectorLayer _read_array_for_area
+on 0.0%: VectorLayer::read 1.271963119506836
+on 0.0%: OMAR: LayerOperation _eval
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: RasterLayer _read_array_with_window
+on 0.0%: OMAR: LayerMathMixin _eval
+on 0.0%: OMAR: UniformAreaLayer _read_array_with_window
+|████████████████████████████████████████| 100% in 0.3s (3.12%/s) 
