@@ -26,6 +26,8 @@ habitats_pnv_path="${data_base}/habitat_maps/pnv"
 
 output_directory="${data_base}/aohs"
 
+output_species_data_dir="/scratch/omsst2/life-even-30-43/species-info"
+
 for TAXA in "${taxas[@]}"; do
 
     if [ "$TAXA" = "AMPHIBIA" ]; then
@@ -68,6 +70,20 @@ for TAXA in "${taxas[@]}"; do
     echo "${species_files_current}"
     echo "species files historic:"
     echo "${species_files_historic}"
+
+    for f in $species_files_current; do
+        rel_path="${f#$species_data_dir/}"   # strip the base prefix
+        dest="${output_species_data_dir}/${rel_path}"
+        mkdir -p "$(dirname "$dest")"
+        cp "$f" "$dest"
+    done
+
+    for f in $species_files_historic; do
+        rel_path="${f#$species_data_dir/}"
+        dest="${output_species_data_dir}/${rel_path}"
+        mkdir -p "$(dirname "$dest")"
+        cp "$f" "$dest"
+    done
 
 done
 
