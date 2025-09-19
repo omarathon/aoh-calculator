@@ -6,9 +6,9 @@ TRIES=("0")
 echo "warming 1"
 ./run-small-scratch-scrm.sh '' '' '' &> "vary_scrm_ysubstep/warm_1.txt"
 echo "warming 2"
-./run-small-scratch-scrm.sh '' '' '' &> "vary_scrm_ysubstep/warm_1.txt"
+./run-small-scratch-scrm.sh '' '' '' &> "vary_scrm_ysubstep/warm_2.txt"
 echo "warming 3"
-./run-small-scratch-scrm.sh '' '' '' &> "vary_scrm_ysubstep/warm_1.txt"
+./run-small-scratch-scrm.sh '' '' '' &> "vary_scrm_ysubstep/warm_3.txt"
 
 for TRY in "${TRIES[@]}"; do
     echo "Running baseline TRY ${TRY}"
