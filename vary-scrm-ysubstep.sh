@@ -1,6 +1,14 @@
 #!/bin/bash
 
-TRIES = ("0" "1" "2" "3" "4")
+# TRIES=("0" "1" "2" "3" "4")
+TRIES=("0")
+
+echo "warming 1"
+./run-small-scratch-scrm.sh '' '' '' &> "vary_scrm_ysubstep/warm_1.txt"
+echo "warming 2"
+./run-small-scratch-scrm.sh '' '' '' &> "vary_scrm_ysubstep/warm_1.txt"
+echo "warming 3"
+./run-small-scratch-scrm.sh '' '' '' &> "vary_scrm_ysubstep/warm_1.txt"
 
 for TRY in "${TRIES[@]}"; do
     echo "Running baseline TRY ${TRY}"
@@ -8,8 +16,8 @@ for TRY in "${TRIES[@]}"; do
     echo "done"
 done
 
-SCRMS = ("1" "2")
-Y_SUBSTEPS = ("1" "2" "4" "8" "16" "32" "64")
+SCRMS=("1" "2")
+Y_SUBSTEPS=("1" "2" "4" "8" "16" "32" "64")
 
 for SCRM in "${SCRMS[@]}"; do
     for YSUBSTEP in "${Y_SUBSTEPS[@]}"; do
