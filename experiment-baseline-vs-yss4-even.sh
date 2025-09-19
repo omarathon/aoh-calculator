@@ -14,7 +14,7 @@ echo "warming 3"
 
 for TRY in "${TRIES[@]}"; do
     echo "Running baseline TRY ${TRY}"
-    ./run-small-scratch-scrm.sh "aohs_baseline_try_${TRY}" '' '' '' '' &> "${EXP_DIR}/baseline_try_${TRY}.txt"
+    ./run-small-scratch-even.sh "aohs_baseline_try_${TRY}" '' '' '' '' &> "${EXP_DIR}/baseline_try_${TRY}.txt"
     echo "done"
 done
 
@@ -23,6 +23,6 @@ for TRY in "${TRIES[@]}"; do
     YSUBSTEP="4"
     output_file="${EXP_DIR}/scrm_${SCRM}_yss_${YSUBSTEP}_try_${TRY}.txt"
     echo "Running SCRM ${SCRM} YSUBSTEP ${YSUBSTEP} TRY ${TRY}"
-    ./run-small-scratch-scrm.sh "aohs_${SCRM}_yss_${YSUBSTEP}_try_${TRY}" '' '' "${SCRM}" "${YSUBSTEP}" &> "${output_file}"
+    ./run-small-scratch-even.sh "aohs_${SCRM}_yss_${YSUBSTEP}_try_${TRY}" '' '' "${SCRM}" "${YSUBSTEP}" &> "${output_file}"
     echo "done"
 done
