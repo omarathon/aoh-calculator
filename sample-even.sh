@@ -1,8 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-N_AMPH=${1:30} 
-N_AVES=${2:43}
+N_AMPH=${1:-30} 
+N_AVES=${2:-43}
 
 SCRM="${3:-0}"
 YSUBSTEP="${4:-2048}"
