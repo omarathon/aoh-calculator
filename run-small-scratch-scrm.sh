@@ -3,6 +3,7 @@ set -euo pipefail
 
 N="${1:-}"
 SCRM="${2:-0}"
+YSUBSTEP="${3:-2048}"
 
 data_base="/scratch/omsst2/life-small"
 
@@ -74,13 +75,13 @@ for TAXA in "${taxas[@]}"; do
         echo "[$i/$total_current] species=${species_name}, elapsed=${elapsed}s, est_remaining=${remaining}s"
 
         echo "TAXA=${TAXA}, habitat=current, species=${species_name}..."
-        python3 ./aohcalc.py --scrm "${SCRM}" --habitats "$habitats_current_path" --elevation-min "${elevation_min_path}" --elevation-max "${elevation_max_path}" --crosswalk "$crosswalk_path" --speciesdata "$species_file" --output "${output_directory}/current/${TAXA}"
+        python3 ./aohcalc.py --scrm "${SCRM}" --ysubstep "${YSUBSTEP}" --habitats "$habitats_current_path" --elevation-min "${elevation_min_path}" --elevation-max "${elevation_max_path}" --crosswalk "$crosswalk_path" --speciesdata "$species_file" --output "${output_directory}/current/${TAXA}"
 
         echo "TAXA=${TAXA}, habitat=restore, species=${species_name}..."
-        python3 ./aohcalc.py --scrm "${SCRM}" --habitats "$habitats_restore_path" --elevation-min "${elevation_min_path}" --elevation-max "${elevation_max_path}" --crosswalk "$crosswalk_path" --speciesdata "$species_file" --output "${output_directory}/restore/${TAXA}"
+        python3 ./aohcalc.py --scrm "${SCRM}" --ysubstep "${YSUBSTEP}" --habitats "$habitats_restore_path" --elevation-min "${elevation_min_path}" --elevation-max "${elevation_max_path}" --crosswalk "$crosswalk_path" --speciesdata "$species_file" --output "${output_directory}/restore/${TAXA}"
 
         echo "TAXA=${TAXA}, habitat=arable, species=${species_name}..."
-        python3 ./aohcalc.py --scrm "${SCRM}" --habitats "$habitats_arable_path" --elevation-min "${elevation_min_path}" --elevation-max "${elevation_max_path}" --crosswalk "$crosswalk_path" --speciesdata "$species_file" --output "${output_directory}/arable/${TAXA}"
+        python3 ./aohcalc.py --scrm "${SCRM}" --ysubstep "${YSUBSTEP}" --habitats "$habitats_arable_path" --elevation-min "${elevation_min_path}" --elevation-max "${elevation_max_path}" --crosswalk "$crosswalk_path" --speciesdata "$species_file" --output "${output_directory}/arable/${TAXA}"
 
     done
 
@@ -96,7 +97,7 @@ for TAXA in "${taxas[@]}"; do
         echo "[$i/$total_historic] species=${species_name}, elapsed=${elapsed}s, est_remaining=${remaining}s"
 
         echo "TAXA=${TAXA} habitat=pnv, species=${species_name}..."
-        python3 ./aohcalc.py --scrm "${SCRM}" --habitats "$habitats_pnv_path" --elevation-min "${elevation_min_path}" --elevation-max "${elevation_max_path}" --crosswalk "$crosswalk_path" --speciesdata "$species_file" --output "${output_directory}/pnv/${TAXA}"
+        python3 ./aohcalc.py --scrm "${SCRM}" --ysubstep "${YSUBSTEP}" --habitats "$habitats_pnv_path" --elevation-min "${elevation_min_path}" --elevation-max "${elevation_max_path}" --crosswalk "$crosswalk_path" --speciesdata "$species_file" --output "${output_directory}/pnv/${TAXA}"
 
     done
 

@@ -55,10 +55,12 @@ def aohcalc(
     force_habitat: bool,
     output_directory_path: Path,
     ystep: Optional[int],
-    scrm: Optional[int]
+    scrm: Optional[int],
+    ysubstep: Optional[int]
 ) -> None:
     yirgacheffe.constants.YSTEP = ystep if ystep else 2048
     yirgacheffe.constants.SUBCHUNK_READ_METHOD = scrm if scrm else 0
+    yirgacheffe.constants.Y_SUBCHUNKS_STEP = ysubstep if ysubstep else 2048
 
     t0 = time.time()
 
@@ -250,6 +252,13 @@ def main() -> None:
         dest="ystep"
     )
     parser.add_argument(
+        '--ysubstep',
+        type=int,
+        help="",
+        required=False,
+        dest="ysubstep"
+    )
+    parser.add_argument(
         '--scrm',
         type=int,
         help="",
@@ -323,7 +332,8 @@ def main() -> None:
         args.force_habitat,
         args.output_path,
         args.ystep,
-        args.scrm
+        args.scrm,
+        args.ysubstep
     )
 
 if __name__ == "__main__":
