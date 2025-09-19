@@ -20,7 +20,10 @@ def analyze_log(path):
     stdev = statistics.stdev(values)  # sample standard deviation
     print(f"Count: {len(values)}")
     print(f"Mean: {mean:.2f}")
+    print(f"Max: {max(values):.2f}")
+    print(f"Min: {min(values):.2f}")
     print(f"Sample StdDev: {stdev:.2f}")
+    
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
