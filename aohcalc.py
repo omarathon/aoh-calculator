@@ -18,7 +18,6 @@ from osgeo import gdal # type: ignore
 gdal.UseExceptions()
 
 import yirgacheffe # pylint: disable=C0412,C0413
-yirgacheffe.constants.YSTEP = 2048
 
 import time
 
@@ -55,7 +54,12 @@ def aohcalc(
     species_data_path: Path,
     force_habitat: bool,
     output_directory_path: Path,
+    ystep: Optional[int],
+    scrm: Optional[int]
 ) -> None:
+    yirgacheffe.constants.YSTEP = ystep if ystep else 2048
+    yirgacheffe.constants.SUBCHUNK_READ_METHOD = scrm if scrm else 0
+
     t0 = time.time()
 
     os.makedirs(output_directory_path, exist_ok=True)
@@ -239,6 +243,20 @@ def aohcalc(
 def main() -> None:
     parser = argparse.ArgumentParser(description="Area of habitat calculator.")
     parser.add_argument(
+        '--ystep',
+        type=int,
+        help="",
+        required=False,
+        dest="ystep"
+    )
+    parser.add_argument(
+        '--scrm',
+        type=int,
+        help="",
+        required=False,
+        dest="scrm"
+    )
+    parser.add_argument(
         '--habitats',
         type=Path,
         help="Directory of habitat rasters, one per habitat class.",
@@ -303,7 +321,9 @@ def main() -> None:
         args.crosswalk_path,
         args.species_data_path,
         args.force_habitat,
-        args.output_path
+        args.output_path,
+        args.ystep,
+        args.scrm
     )
 
 if __name__ == "__main__":
