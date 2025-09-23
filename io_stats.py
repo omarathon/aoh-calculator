@@ -1,11 +1,18 @@
 import re
 import statistics
+import sys  # added
 
-log_file = "trace_io_server.txt"
+# Use first command-line argument as log file
+if len(sys.argv) < 3:
+    print("Usage: python script.py <log_file>")
+    sys.exit(1)
+
+log_file = sys.argv[1]  # replaced hardcoded filename
+iostr = sys.argv[2]
 
 run_pattern = re.compile(r"^TAXA=.*")
 total_pattern = re.compile(r"total time (\S+) main calculation (\S+)")
-io_pattern = re.compile(r"IO (\S+)")
+io_pattern = re.compile(rf" {iostr} (\S+)")
 
 runs = []
 current_io_before = 0.0
@@ -59,10 +66,14 @@ with open(log_file) as f:
 results = []
 io_ratios = []
 io_main_ratios = []
+total_time_mains = []
+total_times = []
+ratio_time_mains = []
 for run in runs:
     total_io = run["io_before"] + run["io_main"]
     ratio_total = total_io / run["total_time"] if run["total_time"] > 0 else 0
     ratio_main = run["io_main"] / run["main_time"] if run["main_time"] > 0 else 0
+    ratio_time_main = run["main_time"] / run["total_time"]
     results.append({
         **run,
         "total_io": total_io,
@@ -71,6 +82,10 @@ for run in runs:
     })
     io_ratios.append(ratio_total)
     io_main_ratios.append(ratio_main)
+    total_time_mains.append(run["main_time"])
+    total_times.append(run["total_time"])
+    ratio_time_mains.append(ratio_time_main)
+
 
 # Aggregate stats
 def summary_stats(values):
@@ -83,7 +98,10 @@ def summary_stats(values):
 
 agg = {
     "ratio_total": summary_stats(io_ratios),
-    "ratio_main": summary_stats(io_main_ratios)
+    "ratio_main": summary_stats(io_main_ratios),
+    "total_time": summary_stats(total_times),
+    "total_time_main": summary_stats(total_time_mains),
+    "ratio_time_main": summary_stats(ratio_time_mains)
 }
 
 # Show results
