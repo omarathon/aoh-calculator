@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# TRIES=("0" "1" "2" "3" "4")
-TRIES=("0")
+TRIES=("0" "1" "2" "3" "4")
+# TRIES=("0")
 
 echo "warming 1"
 ./run-small-scratch-scrm.sh '' '' '' &> "vary_scrm_ysubstep/warm_1.txt"
@@ -17,7 +17,7 @@ for TRY in "${TRIES[@]}"; do
 done
 
 SCRMS=("1" "2")
-Y_SUBSTEPS=("1" "2" "4" "8" "16" "32" "64")
+Y_SUBSTEPS=("1" "2" "4" "8" "16" "32")
 
 for SCRM in "${SCRMS[@]}"; do
     for YSUBSTEP in "${Y_SUBSTEPS[@]}"; do
