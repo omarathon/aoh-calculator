@@ -62,8 +62,6 @@ def aohcalc(
     yirgacheffe.constants.SUBCHUNK_READ_METHOD = scrm if scrm else 0
     yirgacheffe.constants.Y_SUBCHUNKS_STEP = ysubstep if ysubstep else 2048
 
-    t0 = time.time()
-
     os.makedirs(output_directory_path, exist_ok=True)
 
     crosswalk_table = load_crosswalk_table(crosswalk_path)
@@ -109,7 +107,7 @@ def aohcalc(
             json.dump(manifest, f)
         sys.exit()
 
-    ideal_habitat_map_files = [habitat_path / f"lcc_{x}.tif" for x in habitat_list]
+    ideal_habitat_map_files = [habitat_path / f"lcc_{x}_q22.tif" for x in habitat_list]
     habitat_map_files = [x for x in ideal_habitat_map_files if x.exists()]
     if force_habitat and len(habitat_map_files) == 0:
         logger.error("No matching habitat layers found for %s_%s in %s: %s",
@@ -118,6 +116,8 @@ def aohcalc(
         with open(manifest_filename, 'w', encoding="utf-8") as f:
             json.dump(manifest, f)
         sys.exit()
+
+    t0 = time.time()
 
     habitat_maps = [RasterLayer.layer_from_file(x) for x in habitat_map_files]
 
@@ -140,6 +140,7 @@ def aohcalc(
     try:
         intersection = RasterLayer.find_intersection(layers)
     except ValueError:
+        assert False
         logger.warning("Failed to find intersection for %s: %s",  species_data_path, range_map.area)
 
         result = RasterLayer.empty_raster_layer_like(
@@ -165,7 +166,7 @@ def aohcalc(
     for layer in layers:
         layer.set_window_for_intersection(intersection)
 
-    range_total = (range_map * area_map).sum()
+    range_total = range_map.sum()
 
     # Habitat evaluation. In the IUCN Redlist Technical Working Group recommendations, if there are no defined
     # habitats, then we revert to range. If the area of the habitat map filtered by species habitat is zero then we
@@ -202,34 +203,28 @@ def aohcalc(
     # filtering of the DEM returns zero, then we ignore this layer on the assumption that there is error in the
     # elevation data. This aligns with the data hygine practices recommended by Busana et al, as implemented
     # in cleaning.py, where any bad values for elevation cause us assume the entire range is valid.
-    hab_only_total = (filtered_by_habtitat * area_map).sum()
+    hab_only_total = filtered_by_habtitat.sum()
 
     filtered_elevation = (min_elevation_map <= elevation_upper) & (max_elevation_map >= elevation_lower)
 
-    dem_only_total = (filtered_elevation * range_map * area_map).sum()
+    dem_only_total = (filtered_elevation * range_map).sum()
 
     filtered_by_both = filtered_elevation * filtered_by_habtitat
     if filtered_by_both.sum() == 0:
         filtered_by_both = filtered_by_habtitat
 
-    calc = filtered_by_both * area_map
-
-    t1 = time.time()
-
-    print("doing main calculation")
-
     with RasterLayer.empty_raster_layer_like(
         min_elevation_map,
         filename=result_filename,
         compress=True,
-        datatype=gdal.GDT_Float32
+        datatype=gdal.GDT_Int32
     ) as aoh_raster:
         with alive_bar(manual=True) as bar:
-            aoh_total = calc.save(aoh_raster, and_sum=True, callback=bar)
+            aoh_total = filtered_by_both.save(aoh_raster, and_sum=True, callback=bar)
 
-    t2 = time.time()
+    t1 = time.time()
 
-    print(f"total time {(t2 - t0) * 1000} main calculation {(t1 - t0) * 1000}")
+    print(f"total time {(t1 - t0) * 1000}")
 
     manifest.update({
         'range_total': range_total,
