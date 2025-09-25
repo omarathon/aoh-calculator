@@ -23,9 +23,11 @@ from typing import Union
 import yirgacheffe # pylint: disable=C0412,C0413
 yirgacheffe.constants.VERBOSE_CACHE = False
 
-# from memory_profiler import profile
+from memory_profiler import profile
 
 import fiona
+
+CACHE_EXTRA = False
 
 CODEC_ID_UNIFORM = 0
 CODEC_ID_BINARY = 6
@@ -213,24 +215,32 @@ def aohcalc(
     force_habitat: bool,
     output_directory_path: Path,
     cache_mode: Optional[int],
-    ystep: Optional[int]
+    ystep: Optional[int],
+    xss: Optional[int],
+    yss: Optional[int]
 ) -> None:
     global CODEC_ID_UNIFORM
     global CODEC_ID_BINARY
 
     cache_mode_parsed = int(cache_mode) if cache_mode else 0
     ystep_parsed = int(ystep) if ystep else 2048
+    xss_parsed = int(xss) if xss else 256
+    yss_parsed = int(yss) if yss else 256
 
-    print(f"cache_mode_parsed={cache_mode_parsed}\nystep_parsed={ystep_parsed}")
+    print(f"cache_mode_parsed={cache_mode_parsed}\nystep_parsed={ystep_parsed}\nxss_parsed={xss_parsed}\nyss_parsed={yss_parsed}")
 
     yirgacheffe.constants.YSTEP = ystep_parsed
+    yirgacheffe.constants.SUB_BLOCK_WIDTH = xss_parsed
+    yirgacheffe.constants.SUB_BLOCK_HEIGHT = yss_parsed
 
     if cache_mode_parsed == 1:
         CODEC_ID_UNIFORM = -1
         CODEC_ID_BINARY = -1
+        # CODEC_ID_UNIFORM = 99
+        # CODEC_ID_BINARY = 99
 
     if cache_mode_parsed > 0:
-        gdal.SetCacheMax(100 * 1024 * 1024) # (mostly) disable gdal cache in favor of custom
+        gdal.SetCacheMax(1 * 1024 * 1024) # (mostly) disable gdal cache in favor of custom
 
     os.makedirs(output_directory_path, exist_ok=True)
 
@@ -290,7 +300,19 @@ def aohcalc(
 
     min_elevation_map = RasterLayer.layer_from_file(min_elevation_path)
     max_elevation_map = RasterLayer.layer_from_file(max_elevation_path)
+    if cache_mode_parsed > 0:
+        min_elevation_map.compress = True
+        min_elevation_map.codec_id = CODEC_ID_UNIFORM
 
+        max_elevation_map.compress = True
+        max_elevation_map.codec_id = CODEC_ID_UNIFORM
+
+        for map in habitat_maps:
+            map.compress = True
+            map.codec_id = CODEC_ID_UNIFORM
+
+    # (min_elevation_map <= 0).sum()
+    # (max_elevation_map <= 0).sum()
 
     # species_raster_path = species_data_path.with_suffix(".tif")
 
@@ -366,7 +388,7 @@ def aohcalc(
             combined_habitat = combined_habitat + map_layer
         combined_habitat = combined_habitat.clip(max=1.0)
         filtered_by_habtitat = range_map * combined_habitat
-        if cache_mode_parsed > 0:
+        if cache_mode_parsed > 0 and CACHE_EXTRA:
             filtered_by_habtitat.compress = True
             filtered_by_habtitat.codec_id = CODEC_ID_UNIFORM
         if filtered_by_habtitat.sum() == 0:
@@ -394,14 +416,17 @@ def aohcalc(
     hab_only_total = filtered_by_habtitat.sum()
 
     filtered_elevation = (min_elevation_map <= elevation_upper) & (max_elevation_map >= elevation_lower)
-    if cache_mode_parsed > 0:
+    if cache_mode_parsed > 0 and CACHE_EXTRA:
         filtered_elevation.compress = True
         filtered_elevation.codec_id = CODEC_ID_BINARY
 
+    # wtf = (min_elevation_map <= elevation_upper).sum()
+    # (min_elevation_map <= 0).sum()
+    # (max_elevation_map <= 0).sum()
     dem_only_total = (filtered_elevation * range_map).sum()
 
     filtered_by_both = filtered_elevation * filtered_by_habtitat
-    if cache_mode_parsed > 0:
+    if cache_mode_parsed > 0 and CACHE_EXTRA:
         filtered_by_both.compress = True
         filtered_by_both.codec_id = CODEC_ID_UNIFORM
     if filtered_by_both.sum() == 0:
@@ -502,6 +527,20 @@ def main() -> None:
         required=False,
         dest='ystep',
     )
+    parser.add_argument(
+        '--xss',
+        type=int,
+        help='',
+        required=False,
+        dest='xss',
+    )
+    parser.add_argument(
+        '--yss',
+        type=int,
+        help='',
+        required=False,
+        dest='yss',
+    )
     args = parser.parse_args()
 
     aohcalc(
@@ -514,7 +553,9 @@ def main() -> None:
         args.force_habitat,
         args.output_path,
         args.cache_mode,
-        args.ystep
+        args.ystep,
+        args.xss,
+        args.yss
     )
 
 if __name__ == "__main__":
