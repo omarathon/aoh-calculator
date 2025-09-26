@@ -125,7 +125,8 @@ def aohcalc(
     max_elevation_map = RasterLayer.layer_from_file(max_elevation_path)
     range_map = VectorLayer.layer_from_file_like(
         species_data_path,
-        min_elevation_map
+        min_elevation_map,
+        datatype=gdal.GDT_Int32
     )
 
     area_map = ConstantLayer(1.0)
@@ -178,8 +179,8 @@ def aohcalc(
     if habitat_maps or force_habitat:
         combined_habitat = habitat_maps[0]
         for map_layer in habitat_maps[1:]:
-            combined_habitat = combined_habitat + map_layer
-        combined_habitat = combined_habitat.clip(max=1.0)
+            combined_habitat = (combined_habitat + map_layer).clip(max=2**22)
+        # combined_habitat = combined_habitat.clip(max=1.0)
         filtered_by_habtitat = range_map * combined_habitat
         if filtered_by_habtitat.sum() == 0:
             if force_habitat:
@@ -195,15 +196,15 @@ def aohcalc(
                     json.dump(manifest, f)
                 return
             else:
-                filtered_by_habtitat = range_map
+                filtered_by_habtitat = range_map * (2 ** 22)
     else:
-        filtered_by_habtitat = range_map
+        filtered_by_habtitat = range_map * (2 ** 22)
 
     # Elevation evaluation. As per the IUCN Redlist Technical Working Group recommendations, if the elevation
     # filtering of the DEM returns zero, then we ignore this layer on the assumption that there is error in the
     # elevation data. This aligns with the data hygine practices recommended by Busana et al, as implemented
     # in cleaning.py, where any bad values for elevation cause us assume the entire range is valid.
-    hab_only_total = filtered_by_habtitat.sum()
+    hab_only_total = filtered_by_habtitat.sum() / (2 ** 22)
 
     filtered_elevation = (min_elevation_map <= elevation_upper) & (max_elevation_map >= elevation_lower)
 
@@ -220,7 +221,7 @@ def aohcalc(
         datatype=gdal.GDT_Int32
     ) as aoh_raster:
         with alive_bar(manual=True) as bar:
-            aoh_total = filtered_by_both.save(aoh_raster, and_sum=True, callback=bar)
+            aoh_total = filtered_by_both.save(aoh_raster, and_sum=True, callback=bar) / (2 ** 22)
 
     t1 = time.time()
 
