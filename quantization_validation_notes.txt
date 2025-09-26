@@ -1,0 +1,21 @@
+EXPECTED
+
+cat /scratch/omsst2/aohs_specific_main/current/AVES/22706068_BREEDING.json
+
+{"id_no": "22706068", "season": "BREEDING", "elevation_lower": "-500", "elevation_upper": "5000", "full_habitat_code": "1.5|4.4|3.7|1.9|14.6|3.5", "family_name": "CORVIDAE", "class_name": "AVES", "range_total": 27271678.0, "hab_total": 2734934.625063161, "dem_total": 27106636.0, "aoh_total": 2734818.037368112, "prevalence": 0.1002805194960175}
+
+
+
+
+with quant
+
+cat /scratch/omsst2/aohs_specific_quant/current/AVES/22706068_BREEDING.json
+
+
+{"id_no": "22706068", "season": "BREEDING", "elevation_lower": "-500", "elevation_upper": "5000", "full_habitat_code": "1.5|4.4|3.7|1.9|14.6|3.5", "family_name": "CORVIDAE", "class_name": "AVES", "range_total": 27271678.0, "hab_total": 2734934.6292977333, "dem_total": 27106636.0, "aoh_total": 2734818.041599512, "prevalence": 0.10028051965117482}
+
+
+
+
+
+ python3 ./aohcalc.py --habitats /scratch/omsst2/life-small/habitat_maps_q22/current --elevation-min /scratch/omsst2/life-small/elevation-min-1k-int32.tif --elevation-max /scratch/omsst2/life-small/elevation-max-1k-int32.tif --crosswalk /scratch/omsst2/life-small/crosswalk.csv --speciesdata /scratch/omsst2/species-info-specific/AVES/current/22706068_BREEDING.geojson --output /scratch/omsst2/aohs_specific_main/current/AVES
