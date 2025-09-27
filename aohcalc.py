@@ -5,6 +5,7 @@ import os
 import logging
 import sys
 from pathlib import Path
+import time
 from typing import Dict, List, Optional, Set
 
 # import pyshark # pylint: disable=W0611
@@ -21,167 +22,38 @@ from osgeo import ogr
 from typing import Union 
 
 import yirgacheffe # pylint: disable=C0412,C0413
-yirgacheffe.constants.VERBOSE_CACHE = False
+# yirgacheffe.constants.VERBOSE_CACHE = False
 
 from memory_profiler import profile
 
-import fiona
+ELEVATION_MAX_MIN = -415
+ELEVATION_MIN_MIN = -599
 
-CACHE_EXTRA = False
+# // benefit from morton: 2, 3, 4, 6, 100-103, 7, 8, 10, 11, 12, 200-202
+# // 2: fastpfor_simdpfor
+# // 4: rle
+# // 4: rle + simdcomp
+# // 6: rle + fastpfor_bitpack
+# // 100-103: bad
+# // 7: turbopfor256
+# // 8: delta+turbopfor256
+# // 10: delta+turbopack256
+# // 11: turborle
+# // 12: turbopfor
+# // 200: delta
+# // 201: delta+fastpfor_bitpack
+# // 202: delta+simdcomp
 
-CODEC_ID_UNIFORM = 0
-CODEC_ID_BINARY = 6
+# CACHE_EXTRA = False
+
+# CODEC_ID_UNIFORM = 0
+# CODEC_ID_BINARY = 6
+CODEC_ID_HABITAT = 0       # 1 seems best - 15s runtime, 1.46B. 6 also good.
+CODEC_ID_ELEVATION = 0     # 1 seems best - 15s runtime, 1.46B. 6 also good.
+CODEC_ID_BINARY = 0           # 0 seems best - 15s runtime, 1.46B. very simimilar to 1 - slightly longer runtime (15s round) but 1.5B usage. 6 is also good - similar.
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)-8s %(message)s')
-
-# def rasterise_species_geojson(
-#     species_path: Path,
-#     reference_layer: RasterLayer,
-#     output_path: Path,
-#     burn_value: Union[int, float, str] = 1
-# ) -> Path:
-#     """
-#     Rasterises a species GeoJSON to a GeoTIFF aligned with the reference raster grid,
-#     but only covering the bounding box of the species geometry.
-#     """
-#     vectors = ogr.Open(str(species_path))
-#     if vectors is None:
-#         raise FileNotFoundError(f"Failed to open {species_path}")
-#     layer = vectors.GetLayer()
-
-#     # Use reference projection
-#     projection = reference_layer.map_projection
-#     abs_xstep, abs_ystep = abs(projection.xstep), abs(projection.ystep)
-
-#     # Get species geometry bounding box
-#     layer_extent = layer.GetExtent()  # (minx, maxx, miny, maxy)
-
-#     # Snap bounding box to reference raster grid
-#     left = math.floor(layer_extent[0] / abs_xstep) * abs_xstep
-#     right = math.ceil(layer_extent[1] / abs_xstep) * abs_xstep
-#     bottom = math.floor(layer_extent[2] / abs_ystep) * abs_ystep
-#     top = math.ceil(layer_extent[3] / abs_ystep) * abs_ystep
-
-#     width = round((right - left) / abs_xstep)
-#     height = round((top - bottom) / abs_ystep)
-
-#     options = ["INTERLEAVE=BAND", "COMPRESS=LZW", f"BLOCKXSIZE={width}", "BLOCKYSIZE=1"]
-
-#     dataset = gdal.GetDriverByName("GTiff").Create(
-#         str(output_path),
-#         width,
-#         height,
-#         1,
-#         reference_layer.datatype.to_gdal(),
-#         options,
-#     )
-#     dataset.SetProjection(projection.name)
-#     dataset.SetGeoTransform([left, projection.xstep, 0.0, top, 0.0, projection.ystep])
-
-#     if isinstance(burn_value, (int, float)):
-#         gdal.RasterizeLayer(dataset, [1], layer, burn_values=[burn_value], options=["ALL_TOUCHED=TRUE"])
-#     elif isinstance(burn_value, str):
-#         gdal.RasterizeLayer(dataset, [1], layer, options=[f"ATTRIBUTE={burn_value}", "ALL_TOUCHED=TRUE"])
-#     else:
-#         raise ValueError("Burn value must be number or field name")
-
-#     return output_path
-
-def rasterise_species_geojson(
-    species_path: Path,
-    reference_layer: RasterLayer,
-    output_path: Path,
-    burn_value: Union[int, float, str] = 1
-) -> Path:
-    """
-    Rasterises a species GeoJSON to a GeoTIFF aligned with the full reference raster grid.
-    """
-    vectors = ogr.Open(str(species_path))
-    if vectors is None:
-        raise FileNotFoundError(f"Failed to open {species_path}")
-    layer = vectors.GetLayer()
-
-    projection = reference_layer.map_projection
-    area = reference_layer.area
-    abs_xstep, abs_ystep = abs(projection.xstep), abs(projection.ystep)
-
-    width = round((area.right - area.left) / abs_xstep)
-    height = round((area.top - area.bottom) / abs_ystep)
-
-    # options = [
-    #     "INTERLEAVE=BAND",
-    #     "COMPRESS=LZW",
-    #     "PREDICTOR=2",   # improves LZW compression for integer rasters
-    #     # f"BLOCKXSIZE={width}",
-    #     # "BLOCKYSIZE=1",
-    #     "SPARSE_OK=TRUE",
-    #     "BLOCKXSIZE=512",
-    #     "BLOCKYSIZE=1"
-    # ]
-
-    # dataset = gdal.GetDriverByName("GTiff").Create(
-    #     str(output_path),
-    #     width,
-    #     height,
-    #     1,
-    #     reference_layer.datatype.to_gdal(),
-    #     options,
-    # )
-
-    # options = [
-    #     "NBITS=1",        # store as 1-bit
-    #     "TILED=YES",      # better for IO
-    #     "SPARSE_OK=TRUE", # avoids writing big empty tiles
-    # ]
-    # dataset = gdal.GetDriverByName("GTiff").Create(
-    #     str(output_path),
-    #     width,
-    #     height,
-    #     1,
-    #     gdal.GDT_Byte,
-    #     options,
-    # )
-
-    options = [
-        "TILED=YES",
-        "BLOCKXSIZE=16",
-        "BLOCKYSIZE=16",
-        "INTERLEAVE=BAND",
-        "SPARSE_OK=TRUE",
-    ]
-    dataset = gdal.GetDriverByName("GTiff").Create(
-        str(output_path),
-        width,
-        height,
-        1,
-        gdal.GDT_Byte,   # 1 byte per pixel, no compression
-        options,
-    )
-
-    # Mark background as nodata
-    band = dataset.GetRasterBand(1)
-    band.SetNoDataValue(0)
-    
-    dataset.SetProjection(projection.name)
-    dataset.SetGeoTransform([
-        area.left, projection.xstep, 0.0,
-        area.top, 0.0, projection.ystep
-    ])
-
-    if isinstance(burn_value, (int, float)):
-        gdal.RasterizeLayer(dataset, [1], layer, burn_values=[burn_value], options=["ALL_TOUCHED=TRUE"])
-    elif isinstance(burn_value, str):
-        gdal.RasterizeLayer(dataset, [1], layer, options=[f"ATTRIBUTE={burn_value}", "ALL_TOUCHED=TRUE"])
-    else:
-        raise ValueError("Burn value must be number or field name")
-
-    dataset.FlushCache()
-    dataset = None  # close and write to disk
-
-    return output_path
-
-
 
 def load_crosswalk_table(table_file_name: Path) -> Dict[str,List[int]]:
     rawdata = pd.read_csv(table_file_name)
@@ -219,7 +91,9 @@ def aohcalc(
     xss: Optional[int],
     yss: Optional[int]
 ) -> None:
-    global CODEC_ID_UNIFORM
+    # global CODEC_ID_UNIFORM
+    global CODEC_ID_HABITAT
+    global CODEC_ID_ELEVATION
     global CODEC_ID_BINARY
 
     cache_mode_parsed = int(cache_mode) if cache_mode else 0
@@ -234,13 +108,15 @@ def aohcalc(
     yirgacheffe.constants.SUB_BLOCK_HEIGHT = yss_parsed
 
     if cache_mode_parsed == 1:
-        CODEC_ID_UNIFORM = -1
-        CODEC_ID_BINARY = -1
-        # CODEC_ID_UNIFORM = 99
-        # CODEC_ID_BINARY = 99
+        # CODEC_ID_UNIFORM = -1
+        # CODEC_ID_BINARY = -1
+        # CODEC_ID_UNIFORM = 98
+        CODEC_ID_HABITAT = 99
+        CODEC_ID_ELEVATION = 99
+        CODEC_ID_BINARY = 99
 
-    if cache_mode_parsed > 0:
-        gdal.SetCacheMax(1 * 1024 * 1024) # (mostly) disable gdal cache in favor of custom
+    # if cache_mode_parsed > 0:
+    #     gdal.SetCacheMax(100 * 1024 * 1024) # (mostly) disable gdal cache in favor of custom
 
     os.makedirs(output_directory_path, exist_ok=True)
 
@@ -248,35 +124,36 @@ def aohcalc(
 
     os.environ["OGR_GEOJSON_MAX_OBJ_SIZE"] = "0"
     try:
-        with fiona.open(species_data_path) as src:
-            feature = next(iter(src))  # assume one feature per file
-            props = dict(feature["properties"])
-    except Exception as e:
-        logger.error("Failed to read %s: %s", species_data_path, e)
+        filtered_species_info = gpd.read_file(species_data_path)
+    except: # pylint:disable=W0702
+        logger.error("Failed to read %s", species_data_path)
         sys.exit(1)
+    assert filtered_species_info.shape[0] == 1
 
-    manifest = props.copy()
+    # We drop the geometry as that's a lot of data, more than the raster often
+    species_info = filtered_species_info.drop('geometry', axis=1)
+    manifest = {k: v[0] for (k, v) in species_info.items()}
 
-    species_id = props.get("id_no")
-    seasonality = props.get("season")
-    if seasonality:
+    species_id = filtered_species_info.id_no.values[0]
+    try:
+        seasonality = filtered_species_info.season.values[0]
         result_filename = output_directory_path / f"{species_id}_{seasonality}.tif"
         manifest_filename = output_directory_path / f"{species_id}_{seasonality}.json"
-    else:
+    except AttributeError:
+        seasonality = None
         result_filename = output_directory_path / f"{species_id}.tif"
         manifest_filename = output_directory_path / f"{species_id}.json"
 
     try:
-        elevation_lower = int(math.floor(float(props.get("elevation_lower", 0))))
-        elevation_upper = int(math.ceil(float(props.get("elevation_upper", 0))))
-        raw_habitats = set(props.get("full_habitat_code", "").split("|"))
-    except (AttributeError, TypeError, ValueError):
-        logger.error("Species data missing one or more needed attributes: %s", props)
+        elevation_lower = math.floor(float(filtered_species_info.elevation_lower.values[0]))
+        elevation_upper = math.ceil(float(filtered_species_info.elevation_upper.values[0]))
+        raw_habitats = set(filtered_species_info.full_habitat_code.values[0].split('|'))
+    except (AttributeError, TypeError):
+        logger.error("Species data missing one or more needed attributes: %s", filtered_species_info)
         manifest["error"] = "Species data missing one or more needed attributes"
         with open(manifest_filename, 'w', encoding="utf-8") as f:
             json.dump(manifest, f)
         sys.exit()
-
 
     habitat_list = crosswalk_habitats(crosswalk_table, raw_habitats)
     if force_habitat and len(habitat_list) == 0:
@@ -296,45 +173,39 @@ def aohcalc(
             json.dump(manifest, f)
         sys.exit()
 
+    t0 = time.time()
+
     habitat_maps = [RasterLayer.layer_from_file(x) for x in habitat_map_files]
+
+    print(f"num habitat maps {len(habitat_maps)}")
 
     min_elevation_map = RasterLayer.layer_from_file(min_elevation_path)
     max_elevation_map = RasterLayer.layer_from_file(max_elevation_path)
     if cache_mode_parsed > 0:
-        min_elevation_map.compress = True
-        min_elevation_map.codec_id = CODEC_ID_UNIFORM
+        min_elevation_map.enable_cache(CODEC_ID_ELEVATION)
+        max_elevation_map.enable_cache(CODEC_ID_ELEVATION)
 
-        max_elevation_map.compress = True
-        max_elevation_map.codec_id = CODEC_ID_UNIFORM
+        # min_elevation_map.compress = True
+        # min_elevation_map.codec_id = CODEC_ID_UNIFORM # CODEC_ID_UNIFORM = 1
+
+        # max_elevation_map.compress = True
+        # max_elevation_map.codec_id = CODEC_ID_UNIFORM # CODEC_ID_UNIFORM = 1
 
         for map in habitat_maps:
-            map.compress = True
-            map.codec_id = CODEC_ID_UNIFORM
-
-    # (min_elevation_map <= 0).sum()
-    # (max_elevation_map <= 0).sum()
-
-    # species_raster_path = species_data_path.with_suffix(".tif")
-
-    # if not species_raster_path.exists(): # only rasterise if not already done
-    #     print(f"rasterising species geojson {species_data_path}")
-    #     rasterise_species_geojson(
-    #         species_data_path,
-    #         min_elevation_map,
-    #         species_raster_path,
-    #         burn_value=1
-    #     )
-
-    # range_map = RasterLayer.layer_from_file(species_raster_path)
+            # map.compress = True
+            # map.codec_id = CODEC_ID_UNIFORM # CODEC_ID_UNIFORM = 1
+            map.enable_cache(CODEC_ID_HABITAT)
 
     range_map = VectorLayer.layer_from_file_like(
         species_data_path,
-        min_elevation_map
+        min_elevation_map,
+        datatype=gdal.GDT_Int32
     )
 
     if cache_mode_parsed > 0:
-        range_map.compress = True
-        range_map.codec_id = CODEC_ID_BINARY
+        # range_map.compress = True
+        # range_map.codec_id = CODEC_ID_BINARY
+        range_map.enable_cache(CODEC_ID_BINARY)
         
     area_map = ConstantLayer(1.0)
     if area_path:
@@ -348,6 +219,7 @@ def aohcalc(
     try:
         intersection = RasterLayer.find_intersection(layers)
     except ValueError:
+        assert False
         logger.warning("Failed to find intersection for %s: %s",  species_data_path, range_map.area)
 
         result = RasterLayer.empty_raster_layer_like(
@@ -385,12 +257,15 @@ def aohcalc(
     if habitat_maps or force_habitat:
         combined_habitat = habitat_maps[0]
         for map_layer in habitat_maps[1:]:
-            combined_habitat = combined_habitat + map_layer
-        combined_habitat = combined_habitat.clip(max=1.0)
+            # print(combined_habitat.sum())
+            combined_habitat = (combined_habitat + map_layer).clip(max=2 ** 22)
+            # print(combined_habitat.sum())
+        # combined_habitat = combined_habitat.clip(max=1.0)
+        # print(f"voodoo {combined_habitat.sum()}")
         filtered_by_habtitat = range_map * combined_habitat
-        if cache_mode_parsed > 0 and CACHE_EXTRA:
-            filtered_by_habtitat.compress = True
-            filtered_by_habtitat.codec_id = CODEC_ID_UNIFORM
+        # if cache_mode_parsed > 0 and CACHE_EXTRA:
+        #     filtered_by_habtitat.compress = True
+        #     filtered_by_habtitat.codec_id = CODEC_ID_UNIFORM
         if filtered_by_habtitat.sum() == 0:
             if force_habitat:
                 manifest.update({
@@ -404,35 +279,33 @@ def aohcalc(
                 with open(manifest_filename, 'w', encoding="utf-8") as f:
                     json.dump(manifest, f)
                 return
+                print("ohno")
             else:
-                filtered_by_habtitat = range_map
+                filtered_by_habtitat = range_map * (2 ** 22)
+                print("ohno1")
     else:
-        filtered_by_habtitat = range_map
+        filtered_by_habtitat = range_map * (2 ** 22)
+        print("ohno2")
 
     # Elevation evaluation. As per the IUCN Redlist Technical Working Group recommendations, if the elevation
     # filtering of the DEM returns zero, then we ignore this layer on the assumption that there is error in the
     # elevation data. This aligns with the data hygine practices recommended by Busana et al, as implemented
     # in cleaning.py, where any bad values for elevation cause us assume the entire range is valid.
-    hab_only_total = filtered_by_habtitat.sum()
+    hab_only_total = filtered_by_habtitat.sum() / (2 ** 22)
 
-    filtered_elevation = (min_elevation_map <= elevation_upper) & (max_elevation_map >= elevation_lower)
-    if cache_mode_parsed > 0 and CACHE_EXTRA:
-        filtered_elevation.compress = True
-        filtered_elevation.codec_id = CODEC_ID_BINARY
+    filtered_elevation = (min_elevation_map <= (elevation_upper + abs(ELEVATION_MIN_MIN))) & (max_elevation_map >= (elevation_lower + abs(ELEVATION_MAX_MIN)))
+    # if cache_mode_parsed > 0 and CACHE_EXTRA:
+    #     filtered_elevation.compress = True
+    #     filtered_elevation.codec_id = CODEC_ID_BINARY
 
-    # wtf = (min_elevation_map <= elevation_upper).sum()
-    # (min_elevation_map <= 0).sum()
-    # (max_elevation_map <= 0).sum()
     dem_only_total = (filtered_elevation * range_map).sum()
 
     filtered_by_both = filtered_elevation * filtered_by_habtitat
-    if cache_mode_parsed > 0 and CACHE_EXTRA:
-        filtered_by_both.compress = True
-        filtered_by_both.codec_id = CODEC_ID_UNIFORM
+    # if cache_mode_parsed > 0 and CACHE_EXTRA:
+    #     filtered_by_both.compress = True
+    #     filtered_by_both.codec_id = CODEC_ID_UNIFORM
     if filtered_by_both.sum() == 0:
         filtered_by_both = filtered_by_habtitat
-
-    # calc = filtered_by_both * area_map
 
     with RasterLayer.empty_raster_layer_like(
         min_elevation_map,
@@ -441,8 +314,12 @@ def aohcalc(
         datatype=gdal.GDT_Int32
     ) as aoh_raster:
         with alive_bar(manual=True) as bar:
-            aoh_total = filtered_by_both.save(aoh_raster, and_sum=True, callback=bar)
+            aoh_total = filtered_by_both.save(aoh_raster, and_sum=True, callback=bar) / (2 ** 22)
 
+    t1 = time.time()
+
+    print(f"total time {(t1 - t0) * 1000}")
+    
     manifest.update({
         'range_total': range_total,
         'hab_total': hab_only_total,
@@ -453,7 +330,30 @@ def aohcalc(
     with open(manifest_filename, 'w', encoding="utf-8") as f:
         json.dump(manifest, f)
 
-    print(f"T_CALC={yirgacheffe.constants.TIME_SPENT_CALCULATING}\nT_LOAD={yirgacheffe.constants.TIME_SPENT_LOADING}\nT_WRITE={yirgacheffe.constants.TIME_SPENT_WRITING}")
+    print(f"Metrics:")
+    print(f"TIME_SPENT_CALCULATING={yirgacheffe.metrics.TIME_SPENT_CALCULATING}")
+    print(f"TIME_SPENT_LOADING={yirgacheffe.metrics.TIME_SPENT_LOADING}")
+    print(f"TIME_SPENT_WRITING={yirgacheffe.metrics.TIME_SPENT_WRITING}")
+    print(f"TIME_SPENT_COMPRESSING={yirgacheffe.metrics.TIME_SPENT_COMPRESSING}")
+    print(f"TIME_SPENT_DECOMPRESSING={yirgacheffe.metrics.TIME_SPENT_DECOMPRESSING}")
+
+    TIME_SPENT_ARITHMETIC = \
+        yirgacheffe.metrics.TIME_SPENT_CALCULATING - yirgacheffe.metrics.TIME_SPENT_LOADING - yirgacheffe.metrics.TIME_SPENT_WRITING - yirgacheffe.metrics.TIME_SPENT_COMPRESSING - yirgacheffe.metrics.TIME_SPENT_DECOMPRESSING
+
+    TIME_SPENT = TIME_SPENT_ARITHMETIC + yirgacheffe.metrics.TIME_SPENT_DECOMPRESSING
+    if cache_mode_parsed != 1:
+        TIME_SPENT += yirgacheffe.metrics.TIME_SPENT_COMPRESSING
+
+    TIME_SPENT_PROJECTED_WITH_FUSE=TIME_SPENT
+    if cache_mode_parsed != 1:
+        TIME_SPENT_PROJECTED_WITH_FUSE -= TIME_SPENT_ARITHMETIC
+
+
+    print(f"TIME_SPENT_ARITHMETIC={TIME_SPENT_ARITHMETIC}")
+    print(f"TIME_SPENT={TIME_SPENT}")
+    print(f"TIME_SPENT_PROJECTED_WITH_FUSE={TIME_SPENT_PROJECTED_WITH_FUSE}")
+
+    # print(f"T_CALC={yirgacheffe.constants.TIME_SPENT_CALCULATING}\nT_LOAD={yirgacheffe.constants.TIME_SPENT_LOADING}\nT_WRITE={yirgacheffe.constants.TIME_SPENT_WRITING}")
 
 
 def main() -> None:
