@@ -24,7 +24,7 @@ from typing import Union
 import yirgacheffe # pylint: disable=C0412,C0413
 # yirgacheffe.constants.VERBOSE_CACHE = False
 
-from memory_profiler import profile
+# from memory_profiler import profile
 
 ELEVATION_MAX_MIN = -415
 ELEVATION_MIN_MIN = -599
@@ -48,9 +48,10 @@ ELEVATION_MIN_MIN = -599
 
 # CODEC_ID_UNIFORM = 0
 # CODEC_ID_BINARY = 6
-CODEC_ID_HABITAT = 0       # 1 seems best - 15s runtime, 1.46B. 6 also good.
-CODEC_ID_ELEVATION = 0     # 1 seems best - 15s runtime, 1.46B. 6 also good.
-CODEC_ID_BINARY = 0           # 0 seems best - 15s runtime, 1.46B. very simimilar to 1 - slightly longer runtime (15s round) but 1.5B usage. 6 is also good - similar.
+
+# CODEC_ID_HABITAT = 0       # 1 seems best - 15s runtime, 1.46B. 6 also good.
+# CODEC_ID_ELEVATION = 0     # 1 seems best - 15s runtime, 1.46B. 6 also good.
+# CODEC_ID_BINARY = 0           # 0 seems best - 15s runtime, 1.46B. very simimilar to 1 - slightly longer runtime (15s round) but 1.5B usage. 6 is also good - similar.
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)-8s %(message)s')
@@ -89,34 +90,44 @@ def aohcalc(
     cache_mode: Optional[int],
     ystep: Optional[int],
     xss: Optional[int],
-    yss: Optional[int]
+    yss: Optional[int],
+    codec_habitat: Optional[int],
+    codec_el: Optional[int],
+    codec_range: Optional[int],
+    gdal_cache_max_mb: Optional[int]
 ) -> None:
     # global CODEC_ID_UNIFORM
-    global CODEC_ID_HABITAT
-    global CODEC_ID_ELEVATION
-    global CODEC_ID_BINARY
+    # global CODEC_ID_HABITAT
+    # global CODEC_ID_ELEVATION
+    # global CODEC_ID_BINARY
 
     cache_mode_parsed = int(cache_mode) if cache_mode else 0
     ystep_parsed = int(ystep) if ystep else 2048
     xss_parsed = int(xss) if xss else 256
     yss_parsed = int(yss) if yss else 256
 
+    codec_habitat_parsed = int(codec_habitat) if codec_habitat else 0
+    codec_el_parsed = int(codec_el) if codec_el else 0
+    codec_range_parsed = int(codec_range) if codec_range else 0
+
+
     print(f"cache_mode_parsed={cache_mode_parsed}\nystep_parsed={ystep_parsed}\nxss_parsed={xss_parsed}\nyss_parsed={yss_parsed}")
+    print(f"codec_habitat_parsed={codec_habitat_parsed}\ncodec_el_parsed={codec_el_parsed}\ncodec_range_parsed={codec_range_parsed}")
 
     yirgacheffe.constants.YSTEP = ystep_parsed
     yirgacheffe.constants.SUB_BLOCK_WIDTH = xss_parsed
     yirgacheffe.constants.SUB_BLOCK_HEIGHT = yss_parsed
 
-    if cache_mode_parsed == 1:
-        # CODEC_ID_UNIFORM = -1
-        # CODEC_ID_BINARY = -1
-        # CODEC_ID_UNIFORM = 98
-        CODEC_ID_HABITAT = 99
-        CODEC_ID_ELEVATION = 99
-        CODEC_ID_BINARY = 99
+    # if cache_mode_parsed == 1:
+    #     # CODEC_ID_UNIFORM = -1
+    #     # CODEC_ID_BINARY = -1
+    #     # CODEC_ID_UNIFORM = 98
+    #     CODEC_ID_HABITAT = 99
+    #     CODEC_ID_ELEVATION = 99
+    #     CODEC_ID_BINARY = 99
 
-    # if cache_mode_parsed > 0:
-    #     gdal.SetCacheMax(100 * 1024 * 1024) # (mostly) disable gdal cache in favor of custom
+    if gdal_cache_max_mb:
+        gdal.SetCacheMax(int(gdal_cache_max_mb) * 1024 * 1024)
 
     os.makedirs(output_directory_path, exist_ok=True)
 
@@ -182,8 +193,8 @@ def aohcalc(
     min_elevation_map = RasterLayer.layer_from_file(min_elevation_path)
     max_elevation_map = RasterLayer.layer_from_file(max_elevation_path)
     if cache_mode_parsed > 0:
-        min_elevation_map.enable_cache(CODEC_ID_ELEVATION)
-        max_elevation_map.enable_cache(CODEC_ID_ELEVATION)
+        min_elevation_map.enable_cache(codec_el_parsed)
+        max_elevation_map.enable_cache(codec_el_parsed)
 
         # min_elevation_map.compress = True
         # min_elevation_map.codec_id = CODEC_ID_UNIFORM # CODEC_ID_UNIFORM = 1
@@ -194,7 +205,7 @@ def aohcalc(
         for map in habitat_maps:
             # map.compress = True
             # map.codec_id = CODEC_ID_UNIFORM # CODEC_ID_UNIFORM = 1
-            map.enable_cache(CODEC_ID_HABITAT)
+            map.enable_cache(codec_habitat_parsed)
 
     range_map = VectorLayer.layer_from_file_like(
         species_data_path,
@@ -205,7 +216,7 @@ def aohcalc(
     if cache_mode_parsed > 0:
         # range_map.compress = True
         # range_map.codec_id = CODEC_ID_BINARY
-        range_map.enable_cache(CODEC_ID_BINARY)
+        range_map.enable_cache(codec_range_parsed)
         
     area_map = ConstantLayer(1.0)
     if area_path:
@@ -441,6 +452,34 @@ def main() -> None:
         required=False,
         dest='yss',
     )
+    parser.add_argument(
+        '--codec-habitat',
+        type=int,
+        help='',
+        required=False,
+        dest='codec_habitat',
+    )
+    parser.add_argument(
+        '--codec-elevation',
+        type=int,
+        help='',
+        required=False,
+        dest='codec_elevation',
+    )
+    parser.add_argument(
+        '--codec-range',
+        type=int,
+        help='',
+        required=False,
+        dest='codec_range',
+    )
+    parser.add_argument(
+        '--gdal-cache-max-mb',
+        type=int,
+        help='',
+        required=False,
+        dest='gdal_cache_max_mb',
+    )
     args = parser.parse_args()
 
     aohcalc(
@@ -455,7 +494,11 @@ def main() -> None:
         args.cache_mode,
         args.ystep,
         args.xss,
-        args.yss
+        args.yss,
+        args.codec_habitat,
+        args.codec_elevation,
+        args.codec_range,
+        args.gdal_cache_max_mb
     )
 
 if __name__ == "__main__":
