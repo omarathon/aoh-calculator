@@ -22,9 +22,10 @@ from osgeo import ogr
 from typing import Union 
 
 import yirgacheffe # pylint: disable=C0412,C0413
-# yirgacheffe.constants.VERBOSE_CACHE = False
 
-# from memory_profiler import profile
+import codec
+
+# yirgacheffe.constants.DEBUG_DIMENSIONS = False
 
 ELEVATION_MAX_MIN = -415
 ELEVATION_MIN_MIN = -599
@@ -94,13 +95,11 @@ def aohcalc(
     codec_habitat: Optional[int],
     codec_el: Optional[int],
     codec_range: Optional[int],
-    gdal_cache_max_mb: Optional[int]
+    gdal_cache_max_mb: Optional[int],
+    morton_mode: Optional[int],
+    quant: int
 ) -> None:
-    # global CODEC_ID_UNIFORM
-    # global CODEC_ID_HABITAT
-    # global CODEC_ID_ELEVATION
-    # global CODEC_ID_BINARY
-
+    
     cache_mode_parsed = int(cache_mode) if cache_mode else 0
     ystep_parsed = int(ystep) if ystep else 2048
     xss_parsed = int(xss) if xss else 256
@@ -110,21 +109,17 @@ def aohcalc(
     codec_el_parsed = int(codec_el) if codec_el else 0
     codec_range_parsed = int(codec_range) if codec_range else 0
 
+    morton_mode_parsed = int(morton_mode) if morton_mode else 0
 
     print(f"cache_mode_parsed={cache_mode_parsed}\nystep_parsed={ystep_parsed}\nxss_parsed={xss_parsed}\nyss_parsed={yss_parsed}")
     print(f"codec_habitat_parsed={codec_habitat_parsed}\ncodec_el_parsed={codec_el_parsed}\ncodec_range_parsed={codec_range_parsed}")
+    print(f"quant={quant}")
+
+    print(f"gdal_cache_max_mb={gdal_cache_max_mb}\nmorton_mode_parsed={morton_mode_parsed}")
 
     yirgacheffe.constants.YSTEP = ystep_parsed
     yirgacheffe.constants.SUB_BLOCK_WIDTH = xss_parsed
     yirgacheffe.constants.SUB_BLOCK_HEIGHT = yss_parsed
-
-    # if cache_mode_parsed == 1:
-    #     # CODEC_ID_UNIFORM = -1
-    #     # CODEC_ID_BINARY = -1
-    #     # CODEC_ID_UNIFORM = 98
-    #     CODEC_ID_HABITAT = 99
-    #     CODEC_ID_ELEVATION = 99
-    #     CODEC_ID_BINARY = 99
 
     if gdal_cache_max_mb:
         gdal.SetCacheMax(int(gdal_cache_max_mb) * 1024 * 1024)
@@ -174,7 +169,7 @@ def aohcalc(
             json.dump(manifest, f)
         sys.exit()
 
-    ideal_habitat_map_files = [habitat_path / f"lcc_{x}_q22.tif" for x in habitat_list]
+    ideal_habitat_map_files = [habitat_path / f"lcc_{x}_q{quant}.tif" for x in habitat_list]
     habitat_map_files = [x for x in ideal_habitat_map_files if x.exists()]
     if force_habitat and len(habitat_map_files) == 0:
         logger.error("No matching habitat layers found for %s_%s in %s: %s",
@@ -193,19 +188,10 @@ def aohcalc(
     min_elevation_map = RasterLayer.layer_from_file(min_elevation_path)
     max_elevation_map = RasterLayer.layer_from_file(max_elevation_path)
     if cache_mode_parsed > 0:
-        min_elevation_map.enable_cache(codec_el_parsed)
-        max_elevation_map.enable_cache(codec_el_parsed)
-
-        # min_elevation_map.compress = True
-        # min_elevation_map.codec_id = CODEC_ID_UNIFORM # CODEC_ID_UNIFORM = 1
-
-        # max_elevation_map.compress = True
-        # max_elevation_map.codec_id = CODEC_ID_UNIFORM # CODEC_ID_UNIFORM = 1
-
+        min_elevation_map.enable_cache(codec_el_parsed, morton_mode_parsed)
+        max_elevation_map.enable_cache(codec_el_parsed, morton_mode_parsed)
         for map in habitat_maps:
-            # map.compress = True
-            # map.codec_id = CODEC_ID_UNIFORM # CODEC_ID_UNIFORM = 1
-            map.enable_cache(codec_habitat_parsed)
+            map.enable_cache(codec_habitat_parsed, morton_mode_parsed)
 
     range_map = VectorLayer.layer_from_file_like(
         species_data_path,
@@ -214,9 +200,7 @@ def aohcalc(
     )
 
     if cache_mode_parsed > 0:
-        # range_map.compress = True
-        # range_map.codec_id = CODEC_ID_BINARY
-        range_map.enable_cache(codec_range_parsed)
+        range_map.enable_cache(codec_range_parsed, morton_mode_parsed)
         
     area_map = ConstantLayer(1.0)
     if area_path:
@@ -230,8 +214,8 @@ def aohcalc(
     try:
         intersection = RasterLayer.find_intersection(layers)
     except ValueError:
-        assert False
         logger.warning("Failed to find intersection for %s: %s",  species_data_path, range_map.area)
+        return # NOTE currently returning as i only care about the happy path. the result doesn't need quantization and can just be saved as an int32 though.
 
         result = RasterLayer.empty_raster_layer_like(
             area_map,
@@ -256,6 +240,39 @@ def aohcalc(
     for layer in layers:
         layer.set_window_for_intersection(intersection)
 
+    def print_cache_sizes():
+        sizes = [ \
+            ("min_elevation_map", min_elevation_map.size_bytes_cached()), \
+            ("max_elevation_map", max_elevation_map.size_bytes_cached()), \
+            ("range_map", range_map.size_bytes_cached())  \
+        ]
+        total = min_elevation_map.size_bytes_cached() + max_elevation_map.size_bytes_cached() + range_map.size_bytes_cached()
+        habitat_map_total = 0
+        for i in range(0, len(habitat_maps)):
+            sizes.append((f"habitat_map_{i}", habitat_maps[i].size_bytes_cached()))
+            total += habitat_maps[i].size_bytes_cached()
+            habitat_map_total += habitat_maps[i].size_bytes_cached()
+        sizes.append(("habitat_map_total", habitat_map_total))
+        sizes.append(("total", total))
+        for item, size in sizes:
+            size_mb = size / (1024 * 1024)
+            print(f"{item} = {size} B ({size_mb:.3f} MB)")
+
+    
+
+    if (cache_mode_parsed > 0):
+        print("Staging...")
+
+        min_elevation_map.stage()
+        max_elevation_map.stage()
+        range_map.stage()
+        for map in habitat_maps:
+            map.stage()
+
+        print(f"Cache sizes after staging:")
+        print_cache_sizes()
+        print("")
+
     range_total = range_map.sum()
 
     # Habitat evaluation. In the IUCN Redlist Technical Working Group recommendations, if there are no defined
@@ -268,15 +285,8 @@ def aohcalc(
     if habitat_maps or force_habitat:
         combined_habitat = habitat_maps[0]
         for map_layer in habitat_maps[1:]:
-            # print(combined_habitat.sum())
-            combined_habitat = (combined_habitat + map_layer).clip(max=2 ** 22)
-            # print(combined_habitat.sum())
-        # combined_habitat = combined_habitat.clip(max=1.0)
-        # print(f"voodoo {combined_habitat.sum()}")
+            combined_habitat = (combined_habitat + map_layer).clip(max=2 ** quant)
         filtered_by_habtitat = range_map * combined_habitat
-        # if cache_mode_parsed > 0 and CACHE_EXTRA:
-        #     filtered_by_habtitat.compress = True
-        #     filtered_by_habtitat.codec_id = CODEC_ID_UNIFORM
         if filtered_by_habtitat.sum() == 0:
             if force_habitat:
                 manifest.update({
@@ -290,19 +300,16 @@ def aohcalc(
                 with open(manifest_filename, 'w', encoding="utf-8") as f:
                     json.dump(manifest, f)
                 return
-                print("ohno")
             else:
-                filtered_by_habtitat = range_map * (2 ** 22)
-                print("ohno1")
+                filtered_by_habtitat = range_map * (2 ** quant)
     else:
-        filtered_by_habtitat = range_map * (2 ** 22)
-        print("ohno2")
+        filtered_by_habtitat = range_map * (2 ** quant)
 
     # Elevation evaluation. As per the IUCN Redlist Technical Working Group recommendations, if the elevation
     # filtering of the DEM returns zero, then we ignore this layer on the assumption that there is error in the
     # elevation data. This aligns with the data hygine practices recommended by Busana et al, as implemented
     # in cleaning.py, where any bad values for elevation cause us assume the entire range is valid.
-    hab_only_total = filtered_by_habtitat.sum() / (2 ** 22)
+    hab_only_total = filtered_by_habtitat.sum() / (2 ** quant)
 
     filtered_elevation = (min_elevation_map <= (elevation_upper + abs(ELEVATION_MIN_MIN))) & (max_elevation_map >= (elevation_lower + abs(ELEVATION_MAX_MIN)))
     # if cache_mode_parsed > 0 and CACHE_EXTRA:
@@ -325,7 +332,7 @@ def aohcalc(
         datatype=gdal.GDT_Int32
     ) as aoh_raster:
         with alive_bar(manual=True) as bar:
-            aoh_total = filtered_by_both.save(aoh_raster, and_sum=True, callback=bar) / (2 ** 22)
+            aoh_total = filtered_by_both.save(aoh_raster, and_sum=True, callback=bar) / (2 ** quant)
 
     t1 = time.time()
 
@@ -342,6 +349,7 @@ def aohcalc(
         json.dump(manifest, f)
 
     print(f"Metrics:")
+    print(f"TIME_SPENT_PREPROCESSING={yirgacheffe.metrics.TIME_SPENT_PREPROCESSING}")
     print(f"TIME_SPENT_CALCULATING={yirgacheffe.metrics.TIME_SPENT_CALCULATING}")
     print(f"TIME_SPENT_LOADING={yirgacheffe.metrics.TIME_SPENT_LOADING}")
     print(f"TIME_SPENT_WRITING={yirgacheffe.metrics.TIME_SPENT_WRITING}")
@@ -349,22 +357,17 @@ def aohcalc(
     print(f"TIME_SPENT_DECOMPRESSING={yirgacheffe.metrics.TIME_SPENT_DECOMPRESSING}")
 
     TIME_SPENT_ARITHMETIC = \
-        yirgacheffe.metrics.TIME_SPENT_CALCULATING - yirgacheffe.metrics.TIME_SPENT_LOADING - yirgacheffe.metrics.TIME_SPENT_WRITING - yirgacheffe.metrics.TIME_SPENT_COMPRESSING - yirgacheffe.metrics.TIME_SPENT_DECOMPRESSING
+        yirgacheffe.metrics.TIME_SPENT_CALCULATING - yirgacheffe.metrics.TIME_SPENT_WRITING - yirgacheffe.metrics.TIME_SPENT_DECOMPRESSING
+    
+    NON_IO_TIME_SPENT = yirgacheffe.metrics.TIME_SPENT_PREPROCESSING + yirgacheffe.metrics.TIME_SPENT_CALCULATING - yirgacheffe.metrics.TIME_SPENT_LOADING - yirgacheffe.metrics.TIME_SPENT_WRITING
 
-    TIME_SPENT = TIME_SPENT_ARITHMETIC + yirgacheffe.metrics.TIME_SPENT_DECOMPRESSING
-    if cache_mode_parsed != 1:
-        TIME_SPENT += yirgacheffe.metrics.TIME_SPENT_COMPRESSING
+    NON_IO_TIME_SPENT_PROJECTED_WITH_FUSE = NON_IO_TIME_SPENT
+    if cache_mode_parsed == 2:
+        NON_IO_TIME_SPENT_PROJECTED_WITH_FUSE -= TIME_SPENT_ARITHMETIC
 
-    TIME_SPENT_PROJECTED_WITH_FUSE=TIME_SPENT
-    if cache_mode_parsed != 1:
-        TIME_SPENT_PROJECTED_WITH_FUSE -= TIME_SPENT_ARITHMETIC
-
-
-    print(f"TIME_SPENT_ARITHMETIC={TIME_SPENT_ARITHMETIC}")
-    print(f"TIME_SPENT={TIME_SPENT}")
-    print(f"TIME_SPENT_PROJECTED_WITH_FUSE={TIME_SPENT_PROJECTED_WITH_FUSE}")
-
-    # print(f"T_CALC={yirgacheffe.constants.TIME_SPENT_CALCULATING}\nT_LOAD={yirgacheffe.constants.TIME_SPENT_LOADING}\nT_WRITE={yirgacheffe.constants.TIME_SPENT_WRITING}")
+    print(f"\nTIME_SPENT_ARITHMETIC={TIME_SPENT_ARITHMETIC}")
+    print(f"NON_IO_TIME_SPENT={NON_IO_TIME_SPENT}")
+    print(f"NON_IO_TIME_SPENT_PROJECTED_WITH_FUSE={NON_IO_TIME_SPENT_PROJECTED_WITH_FUSE}")
 
 
 def main() -> None:
@@ -480,6 +483,20 @@ def main() -> None:
         required=False,
         dest='gdal_cache_max_mb',
     )
+    parser.add_argument(
+        '--morton-mode',
+        type=int,
+        help='',
+        required=False,
+        dest='morton_mode',
+    )
+    parser.add_argument(
+        '--quant',
+        type=int,
+        help='',
+        required=True,
+        dest='quant',
+    )
     args = parser.parse_args()
 
     aohcalc(
@@ -498,7 +515,9 @@ def main() -> None:
         args.codec_habitat,
         args.codec_elevation,
         args.codec_range,
-        args.gdal_cache_max_mb
+        args.gdal_cache_max_mb,
+        args.morton_mode,
+        args.quant
     )
 
 if __name__ == "__main__":
