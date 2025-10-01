@@ -25,7 +25,7 @@ import yirgacheffe # pylint: disable=C0412,C0413
 
 import codec
 
-# yirgacheffe.constants.DEBUG_DIMENSIONS = False
+yirgacheffe.constants.DEBUG_DIMENSIONS = True
 
 ELEVATION_MAX_MIN = -415
 ELEVATION_MIN_MIN = -599
