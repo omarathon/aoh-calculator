@@ -5,6 +5,7 @@ import os
 import logging
 import sys
 from pathlib import Path
+import time
 from typing import Dict, List, Optional, Set
 
 # import pyshark # pylint: disable=W0611
@@ -18,7 +19,7 @@ from osgeo import gdal # type: ignore
 gdal.UseExceptions()
 
 import yirgacheffe # pylint: disable=C0412,C0413
-yirgacheffe.constants.YSTEP = 2048
+
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)-8s %(message)s')
@@ -53,7 +54,40 @@ def aohcalc(
     species_data_path: Path,
     force_habitat: bool,
     output_directory_path: Path,
+    cache_mode: Optional[int],
+    ystep: Optional[int],
+    xss: Optional[int],
+    yss: Optional[int],
+    codec_habitat: Optional[int],
+    codec_el: Optional[int],
+    codec_range: Optional[int],
+    gdal_cache_max_mb: Optional[int]
 ) -> None:
+    
+    cache_mode_parsed = int(cache_mode) if cache_mode else 0
+    ystep_parsed = int(ystep) if ystep else 2048
+    xss_parsed = int(xss) if xss else 256
+    yss_parsed = int(yss) if yss else 256
+
+    codec_habitat_parsed = int(codec_habitat) if codec_habitat else 98
+    codec_el_parsed = int(codec_el) if codec_el else 98
+    codec_range_parsed = int(codec_range) if codec_range else 98
+
+    print(f"cache_mode_parsed={cache_mode_parsed}\nystep_parsed={ystep_parsed}\nxss_parsed={xss_parsed}\nyss_parsed={yss_parsed}")
+    print(f"codec_habitat_parsed={codec_habitat_parsed}\ncodec_el_parsed={codec_el_parsed}\ncodec_range_parsed={codec_range_parsed}")
+
+    print(f"gdal_cache_max_mb={gdal_cache_max_mb}")
+
+    yirgacheffe.constants.YSTEP = ystep_parsed
+
+    if cache_mode_parsed > 0:
+        yirgacheffe.constants.SUB_BLOCK_WIDTH = xss_parsed
+        yirgacheffe.constants.SUB_BLOCK_HEIGHT = yss_parsed
+
+    if gdal_cache_max_mb:
+        gdal.SetCacheMax(int(gdal_cache_max_mb) * 1024 * 1024)
+
+
     os.makedirs(output_directory_path, exist_ok=True)
 
     crosswalk_table = load_crosswalk_table(crosswalk_path)
@@ -108,15 +142,29 @@ def aohcalc(
         with open(manifest_filename, 'w', encoding="utf-8") as f:
             json.dump(manifest, f)
         sys.exit()
+    
+    t0 = time.time()
 
     habitat_maps = [RasterLayer.layer_from_file(x) for x in habitat_map_files]
 
+    print(f"num habitat maps {len(habitat_maps)}")
+
     min_elevation_map = RasterLayer.layer_from_file(min_elevation_path)
     max_elevation_map = RasterLayer.layer_from_file(max_elevation_path)
+
+    if cache_mode_parsed > 0:
+        min_elevation_map.enable_cache(codec_el_parsed)
+        max_elevation_map.enable_cache(codec_el_parsed)
+        for map in habitat_maps:
+            map.enable_cache(codec_habitat_parsed)
+
     range_map = VectorLayer.layer_from_file_like(
         species_data_path,
         min_elevation_map
     )
+
+    if cache_mode_parsed > 0:
+        range_map.enable_cache(codec_range_parsed)
 
     area_map = ConstantLayer(1.0)
     if area_path:
@@ -131,7 +179,8 @@ def aohcalc(
         intersection = RasterLayer.find_intersection(layers)
     except ValueError:
         logger.warning("Failed to find intersection for %s: %s",  species_data_path, range_map.area)
-
+        return # NOTE only care about happy path right now
+    
         result = RasterLayer.empty_raster_layer_like(
             area_map,
             filename=result_filename,
@@ -154,6 +203,36 @@ def aohcalc(
 
     for layer in layers:
         layer.set_window_for_intersection(intersection)
+
+    def print_cache_sizes():
+        sizes = [ \
+            ("min_elevation_map", min_elevation_map.size_bytes_cached()), \
+            ("max_elevation_map", max_elevation_map.size_bytes_cached()), \
+            ("range_map", range_map.size_bytes_cached())  \
+        ]
+        total = min_elevation_map.size_bytes_cached() + max_elevation_map.size_bytes_cached() + range_map.size_bytes_cached()
+        habitat_map_total = 0
+        for i in range(0, len(habitat_maps)):
+            sizes.append((f"habitat_map_{i}", habitat_maps[i].size_bytes_cached()))
+            total += habitat_maps[i].size_bytes_cached()
+            habitat_map_total += habitat_maps[i].size_bytes_cached()
+        sizes.append(("habitat_map_total", habitat_map_total))
+        sizes.append(("total", total))
+        for item, size in sizes:
+            size_mb = size / (1024 * 1024)
+            print(f"{item} = {size} B ({size_mb:.3f} MB)")
+
+    if cache_mode_parsed > 0:
+        print("Staging...")
+        min_elevation_map.stage()
+        max_elevation_map.stage()
+        range_map.stage()
+        for map in habitat_maps:
+            map.stage()
+
+        print(f"Cache sizes after staging:")
+        print_cache_sizes()
+        print("")
 
     range_total = (range_map).sum()
 
@@ -211,6 +290,10 @@ def aohcalc(
         with alive_bar(manual=True) as bar:
             aoh_total = filtered_by_both.save(aoh_raster, and_sum=True, callback=bar)
 
+    t1 = time.time()
+
+    print(f"total time {(t1 - t0) * 1000}")
+
     manifest.update({
         'range_total': range_total,
         'hab_total': hab_only_total,
@@ -221,8 +304,8 @@ def aohcalc(
     with open(manifest_filename, 'w', encoding="utf-8") as f:
         json.dump(manifest, f)
 
-    
     print(f"Metrics:")
+    print(f"TIME_SPENT_PREPROCESSING={yirgacheffe.metrics.TIME_SPENT_PREPROCESSING}")
     print(f"TIME_SPENT_CALCULATING={yirgacheffe.metrics.TIME_SPENT_CALCULATING}")
     print(f"TIME_SPENT_LOADING={yirgacheffe.metrics.TIME_SPENT_LOADING}")
     print(f"TIME_SPENT_WRITING={yirgacheffe.metrics.TIME_SPENT_WRITING}")
@@ -230,15 +313,17 @@ def aohcalc(
     print(f"TIME_SPENT_DECOMPRESSING={yirgacheffe.metrics.TIME_SPENT_DECOMPRESSING}")
 
     TIME_SPENT_ARITHMETIC = \
-        yirgacheffe.metrics.TIME_SPENT_CALCULATING - yirgacheffe.metrics.TIME_SPENT_LOADING - yirgacheffe.metrics.TIME_SPENT_WRITING - yirgacheffe.metrics.TIME_SPENT_COMPRESSING - yirgacheffe.metrics.TIME_SPENT_DECOMPRESSING
+        yirgacheffe.metrics.TIME_SPENT_CALCULATING - yirgacheffe.metrics.TIME_SPENT_WRITING - yirgacheffe.metrics.TIME_SPENT_DECOMPRESSING
+    
+    NON_IO_TIME_SPENT = yirgacheffe.metrics.TIME_SPENT_PREPROCESSING + yirgacheffe.metrics.TIME_SPENT_CALCULATING - yirgacheffe.metrics.TIME_SPENT_LOADING - yirgacheffe.metrics.TIME_SPENT_WRITING
 
-    TIME_SPENT = TIME_SPENT_ARITHMETIC + yirgacheffe.metrics.TIME_SPENT_DECOMPRESSING
+    NON_IO_TIME_SPENT_PROJECTED_WITH_FUSE = NON_IO_TIME_SPENT
+    if cache_mode_parsed == 2:
+        NON_IO_TIME_SPENT_PROJECTED_WITH_FUSE -= TIME_SPENT_ARITHMETIC
 
-    TIME_SPENT_PROJECTED_WITH_FUSE=TIME_SPENT
-
-    print(f"TIME_SPENT_ARITHMETIC={TIME_SPENT_ARITHMETIC}")
-    print(f"TIME_SPENT={TIME_SPENT}")
-    print(f"TIME_SPENT_PROJECTED_WITH_FUSE={TIME_SPENT_PROJECTED_WITH_FUSE}")
+    print(f"\nTIME_SPENT_ARITHMETIC={TIME_SPENT_ARITHMETIC}")
+    print(f"NON_IO_TIME_SPENT={NON_IO_TIME_SPENT}")
+    print(f"NON_IO_TIME_SPENT_PROJECTED_WITH_FUSE={NON_IO_TIME_SPENT_PROJECTED_WITH_FUSE}")
 
 
 def main() -> None:
@@ -298,6 +383,62 @@ def main() -> None:
         required=True,
         dest='output_path',
     )
+    parser.add_argument(
+        '--cache-mode',
+        type=int,
+        help='',
+        required=False,
+        dest='cache_mode',
+    )
+    parser.add_argument(
+        '--ys',
+        type=int,
+        help='',
+        required=False,
+        dest='ystep',
+    )
+    parser.add_argument(
+        '--xss',
+        type=int,
+        help='',
+        required=False,
+        dest='xss',
+    )
+    parser.add_argument(
+        '--yss',
+        type=int,
+        help='',
+        required=False,
+        dest='yss',
+    )
+    parser.add_argument(
+        '--codec-habitat',
+        type=int,
+        help='',
+        required=False,
+        dest='codec_habitat',
+    )
+    parser.add_argument(
+        '--codec-elevation',
+        type=int,
+        help='',
+        required=False,
+        dest='codec_elevation',
+    )
+    parser.add_argument(
+        '--codec-range',
+        type=int,
+        help='',
+        required=False,
+        dest='codec_range',
+    )
+    parser.add_argument(
+        '--gdal-cache-max-mb',
+        type=int,
+        help='',
+        required=False,
+        dest='gdal_cache_max_mb',
+    )
     args = parser.parse_args()
 
     aohcalc(
@@ -308,7 +449,15 @@ def main() -> None:
         args.crosswalk_path,
         args.species_data_path,
         args.force_habitat,
-        args.output_path
+        args.output_path,
+        args.cache_mode,
+        args.ystep,
+        args.xss,
+        args.yss,
+        args.codec_habitat,
+        args.codec_elevation,
+        args.codec_range,
+        args.gdal_cache_max_mb
     )
 
 if __name__ == "__main__":
