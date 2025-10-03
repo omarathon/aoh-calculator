@@ -151,20 +151,23 @@ def aohcalc(
 
     min_elevation_map = RasterLayer.layer_from_file(min_elevation_path)
     max_elevation_map = RasterLayer.layer_from_file(max_elevation_path)
-
     if cache_mode_parsed > 0:
         min_elevation_map.enable_cache(codec_el_parsed)
         max_elevation_map.enable_cache(codec_el_parsed)
         for map in habitat_maps:
             map.enable_cache(codec_habitat_parsed)
 
-    range_map = VectorLayer.layer_from_file_like(
+    range_map_unstaged = VectorLayer.layer_from_file_like(
+        species_data_path,
+        min_elevation_map
+    )
+    range_map_staged = VectorLayer.layer_from_file_like(
         species_data_path,
         min_elevation_map
     )
 
     if cache_mode_parsed > 0:
-        range_map.enable_cache(codec_range_parsed)
+        range_map_staged.enable_cache(codec_range_parsed)
 
     area_map = ConstantLayer(1.0)
     if area_path:
@@ -174,12 +177,11 @@ def aohcalc(
             area_map = RasterLayer.layer_from_file(area_path)
 
 
-    layers = habitat_maps + [min_elevation_map, max_elevation_map, range_map, area_map]
+    layers = habitat_maps + [min_elevation_map, max_elevation_map, range_map_staged, area_map]
     try:
         intersection = RasterLayer.find_intersection(layers)
     except ValueError:
-        logger.warning("Failed to find intersection for %s: %s",  species_data_path, range_map.area)
-        return # NOTE only care about happy path right now
+        logger.warning("Failed to find intersection for %s: %s",  species_data_path, range_map_staged.area)
     
         result = RasterLayer.empty_raster_layer_like(
             area_map,
@@ -187,7 +189,7 @@ def aohcalc(
             compress=True,
         )
         with alive_bar(manual=True) as bar:
-            range_total = (range_map).save(result, and_sum=True, callback=bar)
+            range_total = range_map_unstaged.save(result, and_sum=True, callback=bar, do_subchunk=False)
 
         manifest.update({
             'range_total': range_total,
@@ -208,9 +210,9 @@ def aohcalc(
         sizes = [ \
             ("min_elevation_map", min_elevation_map.size_bytes_cached()), \
             ("max_elevation_map", max_elevation_map.size_bytes_cached()), \
-            ("range_map", range_map.size_bytes_cached())  \
+            ("range_map", range_map_staged.size_bytes_cached())  \
         ]
-        total = min_elevation_map.size_bytes_cached() + max_elevation_map.size_bytes_cached() + range_map.size_bytes_cached()
+        total = min_elevation_map.size_bytes_cached() + max_elevation_map.size_bytes_cached() + range_map_staged.size_bytes_cached()
         habitat_map_total = 0
         for i in range(0, len(habitat_maps)):
             sizes.append((f"habitat_map_{i}", habitat_maps[i].size_bytes_cached()))
@@ -226,7 +228,7 @@ def aohcalc(
         print("Staging...")
         min_elevation_map.stage()
         max_elevation_map.stage()
-        range_map.stage()
+        range_map_staged.stage(area=intersection)
         for map in habitat_maps:
             map.stage()
 
@@ -234,7 +236,7 @@ def aohcalc(
         print_cache_sizes()
         print("")
 
-    range_total = (range_map).sum()
+    range_total = range_map_unstaged.sum(do_subchunk = False)
 
     # Habitat evaluation. In the IUCN Redlist Technical Working Group recommendations, if there are no defined
     # habitats, then we revert to range. If the area of the habitat map filtered by species habitat is zero then we
@@ -243,12 +245,15 @@ def aohcalc(
     # However, for methodologies, such as the LIFE biodiversity metric by Eyres et al, where you want to do
     # land use change impact scenarios, this rule doesn't work, as it treats extinction due to land use change as
     # then actually filling the range. This we have the force_habitat flag for this use case.
+    
+    filtered_by_habtitat_is_range = False
+
     if habitat_maps or force_habitat:
         combined_habitat = habitat_maps[0]
         for map_layer in habitat_maps[1:]:
             combined_habitat = combined_habitat + map_layer
         combined_habitat = combined_habitat.clip(max=1.0)
-        filtered_by_habtitat = range_map * combined_habitat
+        filtered_by_habtitat = range_map_staged * combined_habitat
         if filtered_by_habtitat.sum() == 0:
             if force_habitat:
                 manifest.update({
@@ -263,23 +268,32 @@ def aohcalc(
                     json.dump(manifest, f)
                 return
             else:
-                filtered_by_habtitat = range_map
+                print("WARNING: filtered_by_habtitat.sum() == 0 && !force_habitat. Using range for filtered_by_habtitat.")
+                filtered_by_habtitat_is_range = True
+                # filtered_by_habtitat = range_map
     else:
-        filtered_by_habtitat = range_map
+        print("WARNING: !(habitat_maps or force_habitat). Using range for filtered_by_habtitat.")
+        filtered_by_habtitat_is_range = True
+        # filtered_by_habtitat = range_map
 
     # Elevation evaluation. As per the IUCN Redlist Technical Working Group recommendations, if the elevation
     # filtering of the DEM returns zero, then we ignore this layer on the assumption that there is error in the
     # elevation data. This aligns with the data hygine practices recommended by Busana et al, as implemented
     # in cleaning.py, where any bad values for elevation cause us assume the entire range is valid.
-    hab_only_total = (filtered_by_habtitat).sum()
+    hab_only_total = filtered_by_habtitat.sum() if not filtered_by_habtitat_is_range else range_total
 
     filtered_elevation = (min_elevation_map <= elevation_upper) & (max_elevation_map >= elevation_lower)
 
-    dem_only_total = (filtered_elevation * range_map).sum()
+    dem_only_total = (filtered_elevation * range_map_staged).sum()
 
-    filtered_by_both = filtered_elevation * filtered_by_habtitat
+    filtered_by_both = filtered_elevation
+    if not filtered_by_habtitat_is_range: 
+        filtered_by_both *= filtered_by_habtitat
+    else:
+        filtered_by_both *= range_map_staged
+
     if filtered_by_both.sum() == 0:
-        filtered_by_both = filtered_by_habtitat
+        filtered_by_both = filtered_by_habtitat if not filtered_by_habtitat_is_range else range_map_unstaged
 
     with RasterLayer.empty_raster_layer_like(
         min_elevation_map,
@@ -288,7 +302,12 @@ def aohcalc(
         datatype=gdal.GDT_Float32
     ) as aoh_raster:
         with alive_bar(manual=True) as bar:
-            aoh_total = filtered_by_both.save(aoh_raster, and_sum=True, callback=bar)
+            aoh_total = filtered_by_both.save(
+                aoh_raster,
+                and_sum=True,
+                callback=bar,
+                do_subchunk = (not filtered_by_habtitat_is_range)
+            )
 
     t1 = time.time()
 
