@@ -324,16 +324,20 @@ def aohcalc(
     dem_only_total = (filtered_elevation * range_map_staged).sum()
 
     filtered_by_both = filtered_elevation
-    if not filtered_by_habtitat_is_range: filtered_by_both *= filtered_by_habtitat 
+    if not filtered_by_habtitat_is_range:
+        filtered_by_both *= filtered_by_habtitat
+        filtered_by_both /= float(2 ** quant) # unquantize as it factors in habitat which is quantized
+    else:
+        filtered_by_both *= range_map_staged
 
     if filtered_by_both.sum() == 0:
-        filtered_by_both = filtered_by_habtitat if not filtered_by_habtitat_is_range else (range_map_unstaged * (2 ** quant))
+        filtered_by_both = filtered_by_habtitat / float(2 ** quant) if not filtered_by_habtitat_is_range else range_map_unstaged
 
     with RasterLayer.empty_raster_layer_like(
         min_elevation_map,
         filename=result_filename,
         compress=True,
-        datatype=gdal.GDT_Int32
+        datatype=gdal.GDT_Float32
     ) as aoh_raster:
         with alive_bar(manual=True) as bar:
             aoh_total = filtered_by_both.save(
@@ -341,7 +345,7 @@ def aohcalc(
                 and_sum=True, 
                 callback=bar,
                 do_subchunk = (not filtered_by_habtitat_is_range)
-            ) / (2 ** quant)
+            )
 
     t1 = time.time()
 
