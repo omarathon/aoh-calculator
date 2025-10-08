@@ -85,7 +85,11 @@ def aohcalc(
         yirgacheffe.constants.SUB_BLOCK_HEIGHT = yss_parsed
 
     if gdal_cache_max_mb:
-        gdal.SetCacheMax(int(gdal_cache_max_mb) * 1024 * 1024)
+        if gdal_cache_max_mb < 0:
+            print("UNBOUNDING GDAL CACHE MEMORY (10GB)")
+            gdal.SetCacheMax(10 * 1024 * 1024 * 1024)
+        else:
+            gdal.SetCacheMax(int(gdal_cache_max_mb) * 1024 * 1024)
 
 
     os.makedirs(output_directory_path, exist_ok=True)
@@ -226,11 +230,19 @@ def aohcalc(
 
     if cache_mode_parsed > 0:
         print("Staging...")
+        tio0 = yirgacheffe.metrics.TIME_SPENT_LOADING
         min_elevation_map.stage()
+        print(f"time loading min_el {yirgacheffe.metrics.TIME_SPENT_LOADING - tio0}")
+        tio0 = yirgacheffe.metrics.TIME_SPENT_LOADING
         max_elevation_map.stage()
+        print(f"time loading max_el {yirgacheffe.metrics.TIME_SPENT_LOADING - tio0}")
+        tio0 = yirgacheffe.metrics.TIME_SPENT_LOADING
         range_map_staged.stage(area=intersection)
+        print(f"time loading rng {yirgacheffe.metrics.TIME_SPENT_LOADING - tio0}")
+        tio0 = yirgacheffe.metrics.TIME_SPENT_LOADING
         for map in habitat_maps:
             map.stage()
+        print(f"time loading hab {yirgacheffe.metrics.TIME_SPENT_LOADING - tio0}")
 
         print(f"Cache sizes after staging:")
         print_cache_sizes()
