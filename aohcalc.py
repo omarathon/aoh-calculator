@@ -109,6 +109,10 @@ def aohcalc(
             json.dump(manifest, f)
         sys.exit()
 
+    print(f"species_data: {species_data_path}")
+
+    print(f"habitat_maps (count={len(habitat_map_files)}): {habitat_map_files}")
+
     habitat_maps = [RasterLayer.layer_from_file(x) for x in habitat_map_files]
 
     min_elevation_map = RasterLayer.layer_from_file(min_elevation_path)
@@ -124,7 +128,6 @@ def aohcalc(
             area_map = UniformAreaLayer.layer_from_file(area_path)
         except ValueError:
             area_map = RasterLayer.layer_from_file(area_path)
-
 
     layers = habitat_maps + [min_elevation_map, max_elevation_map, range_map, area_map]
     try:
@@ -154,6 +157,20 @@ def aohcalc(
 
     for layer in layers:
         layer.set_window_for_intersection(intersection)
+
+    print(f"intersection: {intersection}")
+
+    print("intersection windows:")
+    print(f"min_elevation_map {min_elevation_map.window}")
+    print(f"max_elevation_map {max_elevation_map.window}")
+    print(f"range_map {range_map.window}")
+    for i in range(len(habitat_map_files)):
+        habitat_map_path = habitat_map_files[i]
+        habitat_map = habitat_maps[i]
+        print(f"{habitat_map_path} {habitat_map.window}")
+
+
+    return
 
     range_total = (range_map * area_map).sum()
 
