@@ -47,49 +47,16 @@ def crosswalk_habitats(crosswalk_table: Dict[str, List[int]], raw_habitats: Set[
     return result
 
 def load_species_info(path: Path):
-    import json
+    import ijson
     import pandas as pd
     from pathlib import Path
     try:
-        with open(path, "r", encoding="utf-8") as f:
-            props_lines = []
-            inside_props = False
-            brace_level = 0
+        with open(path, "rb") as f:
+            # ijson.items iterates over matching JSON sub-objects
+            for props in ijson.items(f, "features.item.properties"):
+                return pd.DataFrame([props])
 
-            for line in f:
-                if not inside_props:
-                    if '"properties"' in line:
-                        # find the first '{' after "properties"
-                        idx = line.find('{', line.find('"properties"'))
-                        if idx != -1:
-                            inside_props = True
-                            brace_level = 1
-                            props_lines.append(line[idx:])
-                    continue
-
-                # we're inside the properties block
-                brace_level += line.count('{')
-                brace_level -= line.count('}')
-                props_lines.append(line)
-                if brace_level == 0:
-                    break  # done with properties
-
-        if not props_lines:
-            raise ValueError("No properties found")
-
-        props_text = "".join(props_lines)
-
-        # ensure we cut off any trailing commas or junk before geometry
-        props_text = props_text.strip().rstrip(",").rstrip()
-
-        # validate JSON content
-        props = json.loads(props_text)
-        return pd.DataFrame([props])
-
-    except Exception as e:
-        print(f"⚠️ Fast parse failed ({e}); falling back to GeoPandas.")
-        import geopandas as gpd
-        return gpd.read_file(path, ignore_geometry=True)
+        raise ValueError("No 'features.item.properties' found")
 
     except Exception as e:
         print(f"⚠️ Fast parse failed ({e}); falling back to GeoPandas.")
