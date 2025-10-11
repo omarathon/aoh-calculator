@@ -165,6 +165,10 @@ def aohcalc(
             area_map = RasterLayer.layer_from_file(area_path)
 
     layers = habitat_maps + [min_elevation_map, max_elevation_map, range_map, area_map]
+
+    print(f"time make layers {time.time() - t0}")
+    t0 = time.time()
+
     try:
         intersection = RasterLayer.find_intersection(layers)
     except ValueError:
@@ -190,7 +194,7 @@ def aohcalc(
             json.dump(manifest, f)
         return
     
-    print(f"time make layers and compute intersection {time.time() - t0}")
+    print(f"time compute intersection {time.time() - t0}")
     t0 = time.time()
 
     for layer in layers:
