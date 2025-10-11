@@ -55,7 +55,7 @@ def load_species_info(path: Path):
             return pd.DataFrame([feat["properties"] for feat in src])
     except Exception as e:
         # Fallback to geopandas if Fiona fails
-        print("failed to use fiona")
+        print(f"failed to use fiona {e}")
         import geopandas as gpd
         return gpd.read_file(path, ignore_geometry=True)
 
