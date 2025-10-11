@@ -47,15 +47,34 @@ def crosswalk_habitats(crosswalk_table: Dict[str, List[int]], raw_habitats: Set[
     return result
 
 def load_species_info(path: Path):
+    import json
+    import re
+    import pandas as pd
+    from pathlib import Path
     try:
-        # Fast path: use Fiona directly (no geometry load)
-        import fiona
-        import pandas as pd
-        with fiona.open(path) as src:
-            return pd.DataFrame([feat["properties"] for feat in src])
+        buf = []
+        with open(path, "r", encoding="utf-8") as f:
+            for line in f:
+                buf.append(line)
+                if '"geometry"' in line:
+                    break  # Stop reading as soon as geometry starts
+
+        text = "".join(buf)
+
+        # Extract the JSON for "properties": { ... }
+        match = re.search(
+            r'"properties"\s*:\s*(\{.*?\})\s*,\s*"geometry"',
+            text,
+            re.DOTALL,
+        )
+        if not match:
+            raise ValueError(f"Could not extract properties from {path}")
+
+        props = json.loads(match.group(1))
+        return pd.DataFrame([props])
+
     except Exception as e:
-        # Fallback to geopandas if Fiona fails
-        print(f"failed to use fiona {e}")
+        print(f"⚠️ Fast parse failed ({e}); falling back to GeoPandas.")
         import geopandas as gpd
         return gpd.read_file(path, ignore_geometry=True)
 
