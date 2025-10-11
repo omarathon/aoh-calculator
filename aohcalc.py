@@ -48,29 +48,38 @@ def crosswalk_habitats(crosswalk_table: Dict[str, List[int]], raw_habitats: Set[
 
 def load_species_info(path: Path):
     import json
-    import re
     import pandas as pd
     from pathlib import Path
     try:
-        buf = []
+        props_lines = []
+        inside_props = False
+        brace_level = 0
+
         with open(path, "r", encoding="utf-8") as f:
             for line in f:
-                buf.append(line)
-                if '"geometry"' in line:
-                    break  # Stop reading as soon as geometry starts
+                # detect start of the properties block
+                if not inside_props and '"properties"' in line:
+                    # find the '{' that starts the properties JSON
+                    start_idx = line.find('{', line.find('"properties"'))
+                    if start_idx == -1:
+                        continue
+                    inside_props = True
+                    brace_level = 1
+                    props_lines.append(line[start_idx:])
+                    continue
 
-        text = "".join(buf)
+                if inside_props:
+                    props_lines.append(line)
+                    brace_level += line.count('{')
+                    brace_level -= line.count('}')
+                    if brace_level == 0:
+                        break  # end of properties block
 
-        # Extract the JSON for "properties": { ... }
-        match = re.search(
-            r'"properties"\s*:\s*(\{.*?\})\s*,\s*"geometry"',
-            text,
-            re.DOTALL,
-        )
-        if not match:
-            raise ValueError(f"Could not extract properties from {path}")
+        if not props_lines:
+            raise ValueError("Could not find properties block")
 
-        props = json.loads(match.group(1))
+        props_text = "".join(props_lines)
+        props = json.loads(props_text)
         return pd.DataFrame([props])
 
     except Exception as e:
