@@ -66,7 +66,7 @@ def aohcalc(
 
     os.environ["OGR_GEOJSON_MAX_OBJ_SIZE"] = "0"
     try:
-        filtered_species_info = gpd.read_file(species_data_path)
+        filtered_species_info = gpd.read_file(species_data_path, ignore_geometry=True)
     except: # pylint:disable=W0702
         logger.error("Failed to read %s", species_data_path)
         sys.exit(1)
@@ -76,8 +76,8 @@ def aohcalc(
     t0 = time.time()
 
     # We drop the geometry as that's a lot of data, more than the raster often
-    species_info = filtered_species_info.drop('geometry', axis=1)
-    manifest = {k: v[0] for (k, v) in species_info.items()}
+    # species_info = filtered_species_info.drop('geometry', axis=1)
+    manifest = {k: v[0] for (k, v) in filtered_species_info.items()}
 
     print(f"time drop geometry {time.time() - t0}")
     t0 = time.time()
