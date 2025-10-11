@@ -144,18 +144,32 @@ def aohcalc(
             json.dump(manifest, f)
         sys.exit()
 
+    print(f"time gather habitat_map_files {time.time() - t0}")
+    t0 = time.time()
+
     print(f"species_data: {species_data_path}")
 
     print(f"habitat_maps (count={len(habitat_map_files)}): {habitat_map_files}")
 
     habitat_maps = [RasterLayer.layer_from_file(x) for x in habitat_map_files]
 
+    print(f"time layer_from_file for habitat maps {time.time() - t0}")
+    t0 = time.time()
+
     min_elevation_map = RasterLayer.layer_from_file(min_elevation_path)
     max_elevation_map = RasterLayer.layer_from_file(max_elevation_path)
+
+    print(f"time layer_from_file for elevation maps {time.time() - t0}")
+    t0 = time.time()
+
+
     range_map = VectorLayer.layer_from_file_like(
         species_data_path,
         min_elevation_map
     )
+
+    print(f"time layer_from_file for range_map {time.time() - t0}")
+    t0 = time.time()
 
     area_map = ConstantLayer(1.0)
     if area_path:
@@ -163,6 +177,9 @@ def aohcalc(
             area_map = UniformAreaLayer.layer_from_file(area_path)
         except ValueError:
             area_map = RasterLayer.layer_from_file(area_path)
+
+    print(f"time layer_from_file for area_map {time.time() - t0}")
+    t0 = time.time()
 
     layers = habitat_maps + [min_elevation_map, max_elevation_map, range_map, area_map]
 
