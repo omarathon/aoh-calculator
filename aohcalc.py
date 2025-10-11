@@ -46,6 +46,18 @@ def crosswalk_habitats(crosswalk_table: Dict[str, List[int]], raw_habitats: Set[
         result |= set(crosswalked_habatit)
     return result
 
+def load_species_info(path: Path):
+    try:
+        # Fast path: use Fiona directly (no geometry load)
+        import fiona
+        import pandas as pd
+        with fiona.open(path) as src:
+            return pd.DataFrame([feat["properties"] for feat in src])
+    except Exception as e:
+        # Fallback to geopandas if Fiona fails
+        import geopandas as gpd
+        return gpd.read_file(path, ignore_geometry=True)
+
 def aohcalc(
     habitat_path: Path,
     min_elevation_path: Path,
@@ -66,7 +78,7 @@ def aohcalc(
 
     os.environ["OGR_GEOJSON_MAX_OBJ_SIZE"] = "0"
     try:
-        filtered_species_info = gpd.read_file(species_data_path, ignore_geometry=True)
+        filtered_species_info = load_species_info(species_data_path)
     except: # pylint:disable=W0702
         logger.error("Failed to read %s", species_data_path)
         sys.exit(1)
