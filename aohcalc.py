@@ -26,14 +26,14 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)-8s %(me
 import time
 
 def load_crosswalk_table(table_file_name: Path) -> Dict[str,List[int]]:
-    rawdata = pd.read_csv(table_file_name)
-    result : Dict[str,List[int]] = {}
-    for _, row in rawdata.iterrows():
-        code = str(row.code)
-        try:
-            result[code].append(int(row.value))
-        except KeyError:
-            result[code] = [int(row.value)]
+    import csv
+    result: Dict[str, List[int]] = {}
+    with open(table_file_name, newline='', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            code = str(row["code"])
+            val = int(row["value"])
+            result.setdefault(code, []).append(val)
     return result
 
 def crosswalk_habitats(crosswalk_table: Dict[str, List[int]], raw_habitats: Set[str]) -> Set[int]:
