@@ -75,10 +75,7 @@ def aohcalc(
 ) -> None:
     os.makedirs(output_directory_path, exist_ok=True)
 
-    t0 = time.time()
     crosswalk_table = load_crosswalk_table(crosswalk_path)
-    print(f"time load crosswalk_table {time.time() - t0}")
-    t0 = time.time()
 
 
     os.environ["OGR_GEOJSON_MAX_OBJ_SIZE"] = "0"
@@ -89,15 +86,11 @@ def aohcalc(
         sys.exit(1)
     assert filtered_species_info.shape[0] == 1
 
-    print(f"time load filtered_species_info {time.time() - t0}")
-    t0 = time.time()
 
     # We drop the geometry as that's a lot of data, more than the raster often
     # species_info = filtered_species_info.drop('geometry', axis=1)
     manifest = {k: v[0] for (k, v) in filtered_species_info.items()}
 
-    print(f"time drop geometry {time.time() - t0}")
-    t0 = time.time()
 
     species_id = filtered_species_info.id_no.values[0]
     try:
@@ -120,8 +113,6 @@ def aohcalc(
             json.dump(manifest, f)
         sys.exit()
 
-    print(f"time extracting from filtered_species_info {time.time() - t0}")
-    t0 = time.time()
 
     habitat_list = crosswalk_habitats(crosswalk_table, raw_habitats)
     if force_habitat and len(habitat_list) == 0:
@@ -131,8 +122,6 @@ def aohcalc(
             json.dump(manifest, f)
         sys.exit()
 
-    print(f"time crosswalk_habitats {time.time() - t0}")
-    t0 = time.time()
 
     ideal_habitat_map_files = [habitat_path / f"lcc_{x}.tif" for x in habitat_list]
     habitat_map_files = [x for x in ideal_habitat_map_files if x.exists()]
@@ -144,8 +133,6 @@ def aohcalc(
             json.dump(manifest, f)
         sys.exit()
 
-    print(f"time gather habitat_map_files {time.time() - t0}")
-    t0 = time.time()
 
     print(f"species_data: {species_data_path}")
 
@@ -153,14 +140,10 @@ def aohcalc(
 
     habitat_maps = [RasterLayer.layer_from_file(x) for x in habitat_map_files]
 
-    print(f"time layer_from_file for habitat maps {time.time() - t0}")
-    t0 = time.time()
 
     min_elevation_map = RasterLayer.layer_from_file(min_elevation_path)
     max_elevation_map = RasterLayer.layer_from_file(max_elevation_path)
 
-    print(f"time layer_from_file for elevation maps {time.time() - t0}")
-    t0 = time.time()
 
 
     range_map = VectorLayer.layer_from_file_like(
@@ -168,8 +151,6 @@ def aohcalc(
         min_elevation_map
     )
 
-    print(f"time layer_from_file for range_map {time.time() - t0}")
-    t0 = time.time()
 
     area_map = ConstantLayer(1.0)
     if area_path:
@@ -178,13 +159,9 @@ def aohcalc(
         except ValueError:
             area_map = RasterLayer.layer_from_file(area_path)
 
-    print(f"time layer_from_file for area_map {time.time() - t0}")
-    t0 = time.time()
 
     layers = habitat_maps + [min_elevation_map, max_elevation_map, range_map, area_map]
 
-    print(f"time make layers {time.time() - t0}")
-    t0 = time.time()
 
     try:
         intersection = RasterLayer.find_intersection(layers)
@@ -211,13 +188,9 @@ def aohcalc(
             json.dump(manifest, f)
         return
     
-    print(f"time compute intersection {time.time() - t0}")
-    t0 = time.time()
 
     for layer in layers:
         layer.set_window_for_intersection(intersection)
-
-    print(f"time set intersection {time.time() - t0}")
 
     print(f"intersection: {intersection}")
 
