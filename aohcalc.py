@@ -23,6 +23,8 @@ yirgacheffe.constants.YSTEP = 2048
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)-8s %(message)s')
 
+import time
+
 def load_crosswalk_table(table_file_name: Path) -> Dict[str,List[int]]:
     rawdata = pd.read_csv(table_file_name)
     result : Dict[str,List[int]] = {}
@@ -56,7 +58,11 @@ def aohcalc(
 ) -> None:
     os.makedirs(output_directory_path, exist_ok=True)
 
+    t0 = time.time()
     crosswalk_table = load_crosswalk_table(crosswalk_path)
+    print(f"time load crosswalk_table {time.time() - t0}")
+    t0 = time.time()
+
 
     os.environ["OGR_GEOJSON_MAX_OBJ_SIZE"] = "0"
     try:
@@ -66,9 +72,15 @@ def aohcalc(
         sys.exit(1)
     assert filtered_species_info.shape[0] == 1
 
+    print(f"time load filtered_species_info {time.time() - t0}")
+    t0 = time.time()
+
     # We drop the geometry as that's a lot of data, more than the raster often
     species_info = filtered_species_info.drop('geometry', axis=1)
     manifest = {k: v[0] for (k, v) in species_info.items()}
+
+    print(f"time drop geometry {time.time() - t0}")
+    t0 = time.time()
 
     species_id = filtered_species_info.id_no.values[0]
     try:
@@ -91,6 +103,9 @@ def aohcalc(
             json.dump(manifest, f)
         sys.exit()
 
+    print(f"time extracting from filtered_species_info {time.time() - t0}")
+    t0 = time.time()
+
     habitat_list = crosswalk_habitats(crosswalk_table, raw_habitats)
     if force_habitat and len(habitat_list) == 0:
         logger.error("No habitats found in crosswalk! %s_%s had %s", species_id, seasonality, raw_habitats)
@@ -98,6 +113,9 @@ def aohcalc(
         with open(manifest_filename, 'w', encoding="utf-8") as f:
             json.dump(manifest, f)
         sys.exit()
+
+    print(f"time crosswalk_habitats {time.time() - t0}")
+    t0 = time.time()
 
     ideal_habitat_map_files = [habitat_path / f"lcc_{x}.tif" for x in habitat_list]
     habitat_map_files = [x for x in ideal_habitat_map_files if x.exists()]
@@ -154,9 +172,14 @@ def aohcalc(
         with open(manifest_filename, 'w', encoding="utf-8") as f:
             json.dump(manifest, f)
         return
+    
+    print(f"time make layers and compute intersection {time.time() - t0}")
+    t0 = time.time()
 
     for layer in layers:
         layer.set_window_for_intersection(intersection)
+
+    print(f"time set intersection {time.time() - t0}")
 
     print(f"intersection: {intersection}")
 
